@@ -27,7 +27,5 @@ aim, in transitioning.
   statistics
 - As a user, I want to be able to select multiple previously automatically / manually saved aim training sessions
   and compare all of their statistics with each other
-- As a user, I want to be able to change the color of the targets
-- As a user, I want to be able to change the size of the targets
-- As a user, I want to be able to change the speed of the targets (if the moving targets option is chosen)
+- As a user, I want to be able to change the color, size, and speed (if the moving targets option is chosen) of the targets
 - As a user, I want to be able to view a graph of my individual session statistics and a graph of my lifetime statistics
