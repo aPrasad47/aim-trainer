@@ -168,11 +168,19 @@ public class TargetTest {
 
     @Test
     public void testHasCollidedWithTargetNotCollidedWithArbitraryTarget() {
+        assertNotEquals(3, targetArbitraryInBoundsNotCollided.getPosition().getX());
+        assertNotEquals(12, targetArbitraryInBoundsNotCollided.getPosition().getY());
+        assertNotEquals(14, targetArbitraryInBoundsMoving.getPosition().getX());
+        assertNotEquals(7, targetArbitraryInBoundsMoving.getPosition().getY());
         assertFalse(targetArbitraryInBoundsMoving.hasCollidedWithTarget(targetArbitraryInBoundsNotCollided));
     }
 
     @Test
     public void testHasCollidedWithTargetCollidedWithArbitraryTarget() {
+        assertEquals(3, targetArbitraryInBoundsCollided.getPosition().getX());
+        assertEquals(12, targetArbitraryInBoundsCollided.getPosition().getY());
+        assertEquals(3, targetArbitraryInBoundsMoving.getPosition().getX());
+        assertEquals(12, targetArbitraryInBoundsMoving.getPosition().getY());
         assertTrue(targetArbitraryInBoundsMoving.hasCollidedWithTarget(targetArbitraryInBoundsCollided));
     }
 
