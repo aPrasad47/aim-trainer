@@ -20,6 +20,11 @@ public class TargetTest {
     private Position arbitraryInBounds;
     private Position arbitraryInBoundsNotCollided;
     private Position arbitraryInBoundsCollided;
+    private Position coordXGreaterThanMax;
+    private Position coordYGreaterThanMax;
+    private Position coordXLessThanZero;
+    private Position coordYLessThanZero;
+    private Position allOutOfBounds;
     private Target targetTopLeftMoving;
     private Target targetTopRightMoving;
     private Target targetTopMidMoving;
@@ -31,6 +36,11 @@ public class TargetTest {
     private Target targetArbitraryInBoundsMoving;
     private Target targetArbitraryInBoundsNotCollided;
     private Target targetArbitraryInBoundsCollided;
+    private Target targetCoordXGreaterThanMax;
+    private Target targetCoordYGreaterThanMax;
+    private Target targetCoordXLessThanZero;
+    private Target targetCoordYLessThanZero;
+    private Target targetAllOutOfBounds;
 
     @BeforeEach
     public void setup() {
@@ -45,6 +55,11 @@ public class TargetTest {
         arbitraryInBounds = new Position(3, 12);
         arbitraryInBoundsNotCollided = new Position(14, 7);
         arbitraryInBoundsCollided = new Position(3, 12);
+        coordXGreaterThanMax = new Position(MAX_X + 1, 5);
+        coordYGreaterThanMax = new Position(7, MAX_Y + 1);
+        coordXLessThanZero = new Position(-1, 5);
+        coordYLessThanZero = new Position(4, -1);
+        allOutOfBounds = new Position(-1, -1);
         targetTopLeftMoving = new Target(topLeftScreen, true);
         targetTopRightMoving = new Target(topRightScreen, true);
         targetTopMidMoving = new Target(topMidScreen, true);
@@ -56,6 +71,11 @@ public class TargetTest {
         targetArbitraryInBoundsMoving = new Target(arbitraryInBounds, true);
         targetArbitraryInBoundsNotCollided = new Target(arbitraryInBoundsNotCollided, false);
         targetArbitraryInBoundsCollided = new Target(arbitraryInBoundsCollided, false);
+        targetCoordXGreaterThanMax = new Target(coordXGreaterThanMax, true);
+        targetCoordYGreaterThanMax = new Target(coordYGreaterThanMax, true);
+        targetCoordXLessThanZero = new Target(coordXLessThanZero, true);
+        targetCoordYLessThanZero = new Target(coordYLessThanZero, true);
+        targetAllOutOfBounds = new Target(allOutOfBounds, true);
     }
 
     @Test
@@ -227,6 +247,31 @@ public class TargetTest {
     @Test
     public void testHasValidPositionArbitraryInBounds() {
         assertTrue(targetArbitraryInBoundsMoving.hasValidPosition(MAX_X, MAX_Y));
+    }
+
+    @Test
+    public void testHasValidPositionCoordXGreaterThanMax() {
+        assertFalse(targetCoordXGreaterThanMax.hasValidPosition(MAX_X, MAX_Y));
+    }
+
+    @Test
+    public void testHasValidPositionCoordYGreaterThanMax() {
+        assertFalse(targetCoordYGreaterThanMax.hasValidPosition(MAX_X, MAX_Y));
+    }
+
+    @Test
+    public void testHasValidPositionCoordXLessThanZero() {
+        assertFalse(targetCoordXLessThanZero.hasValidPosition(MAX_X, MAX_Y));
+    }
+
+    @Test
+    public void testHasValidPositionCoordYLessThanZero() {
+        assertFalse(targetCoordYLessThanZero.hasValidPosition(MAX_X, MAX_Y));
+    }
+
+    @Test
+    public void testHasValidPositionAllOutOfBounds() {
+        assertFalse(targetAllOutOfBounds.hasValidPosition(MAX_X, MAX_Y));
     }
 
     @Test
