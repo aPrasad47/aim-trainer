@@ -25,6 +25,8 @@ public class TargetTest {
     private Position coordXLessThanZero;
     private Position coordYLessThanZero;
     private Position allOutOfBounds;
+    private Position diffYThanArbitraryInBounds;
+    private Position sameYThanArbitraryInBounds;
     private Target targetTopLeftMoving;
     private Target targetTopRightMoving;
     private Target targetTopMidMoving;
@@ -41,6 +43,8 @@ public class TargetTest {
     private Target targetCoordXLessThanZero;
     private Target targetCoordYLessThanZero;
     private Target targetAllOutOfBounds;
+    private Target targetDiffYThanArbitraryInBounds;
+    private Target targetSameYThanArbitraryInBounds;
 
     @BeforeEach
     public void setup() {
@@ -60,6 +64,8 @@ public class TargetTest {
         coordXLessThanZero = new Position(-1, 5);
         coordYLessThanZero = new Position(4, -1);
         allOutOfBounds = new Position(-1, -1);
+        diffYThanArbitraryInBounds = new Position(3, 14);
+        sameYThanArbitraryInBounds = new Position(5, 12);
         targetTopLeftMoving = new Target(topLeftScreen, true);
         targetTopRightMoving = new Target(topRightScreen, true);
         targetTopMidMoving = new Target(topMidScreen, true);
@@ -76,6 +82,8 @@ public class TargetTest {
         targetCoordXLessThanZero = new Target(coordXLessThanZero, true);
         targetCoordYLessThanZero = new Target(coordYLessThanZero, true);
         targetAllOutOfBounds = new Target(allOutOfBounds, true);
+        targetDiffYThanArbitraryInBounds = new Target(diffYThanArbitraryInBounds, true);
+        targetSameYThanArbitraryInBounds = new Target(sameYThanArbitraryInBounds, true);
     }
 
     @Test
@@ -193,6 +201,24 @@ public class TargetTest {
         assertNotEquals(14, targetArbitraryInBoundsMoving.getPosition().getX());
         assertNotEquals(7, targetArbitraryInBoundsMoving.getPosition().getY());
         assertFalse(targetArbitraryInBoundsMoving.hasCollidedWithTarget(targetArbitraryInBoundsNotCollided));
+    }
+
+    @Test
+    public void testHasCollidedWithTargetNotCollidedWithArbitraryTargetDiffYSameX() {
+        assertEquals(3, targetDiffYThanArbitraryInBounds.getPosition().getX());
+        assertNotEquals(12, targetDiffYThanArbitraryInBounds.getPosition().getY());
+        assertEquals(3, targetArbitraryInBoundsMoving.getPosition().getX());
+        assertNotEquals(14, targetArbitraryInBoundsMoving.getPosition().getY());
+        assertFalse(targetArbitraryInBoundsMoving.hasCollidedWithTarget(targetDiffYThanArbitraryInBounds));
+    }
+
+    @Test
+    public void testHasCollidedWithTargetNotCollidedWithArbitraryTargetSameYDiffX() {
+        assertNotEquals(3, targetSameYThanArbitraryInBounds.getPosition().getX());
+        assertEquals(12, targetSameYThanArbitraryInBounds.getPosition().getY());
+        assertNotEquals(5, targetArbitraryInBoundsMoving.getPosition().getX());
+        assertEquals(12, targetArbitraryInBoundsMoving.getPosition().getY());
+        assertFalse(targetArbitraryInBoundsMoving.hasCollidedWithTarget(targetDiffYThanArbitraryInBounds));
     }
 
     @Test
