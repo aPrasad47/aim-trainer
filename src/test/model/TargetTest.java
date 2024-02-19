@@ -221,4 +221,56 @@ public class TargetTest {
         assertTrue(targetArbitraryInBoundsMoving.hasValidPosition(MAX_X, MAX_Y));
     }
 
+    @Test
+    public void testTargetHitTargetNotYetHit() {
+        assertFalse(targetArbitraryInBoundsCollided.isHit());
+        targetArbitraryInBoundsCollided.targetHit();
+        assertTrue(targetArbitraryInBoundsCollided.isHit());
+    }
+
+    @Test
+    public void testIncrementNumAttemptToHitOnce() {
+        assertEquals(1, targetBottomLeftMoving.getNumAttemptsToHit());
+        targetBottomLeftMoving.incrementNumAttemptsToHit();
+        assertEquals(2, targetBottomLeftMoving.getNumAttemptsToHit());
+    }
+
+    @Test
+    public void testIncrementNumAttemptToHitMultipleTimes() {
+        assertEquals(1, targetBottomLeftMoving.getNumAttemptsToHit());
+        targetBottomLeftMoving.incrementNumAttemptsToHit();
+        assertEquals(2, targetBottomLeftMoving.getNumAttemptsToHit());
+        targetBottomLeftMoving.incrementNumAttemptsToHit();
+        assertEquals(3, targetBottomLeftMoving.getNumAttemptsToHit());
+        targetBottomLeftMoving.incrementNumAttemptsToHit();
+        assertEquals(4, targetBottomLeftMoving.getNumAttemptsToHit());
+    }
+
+    @Test
+    public void testDecrementLifeSpanOnceNotDead() {
+        assertEquals(3, targetBottomLeftMoving.getLifeSpan());
+        targetBottomLeftMoving.decrementLifeSpan();
+        assertEquals(2, targetBottomLeftMoving.getLifeSpan());
+    }
+
+    @Test
+    public void testDecrementLifeSpanMultipleTimesNotDead() {
+        assertEquals(3, targetBottomLeftMoving.getLifeSpan());
+        targetBottomLeftMoving.decrementLifeSpan();
+        assertEquals(2, targetBottomLeftMoving.getLifeSpan());
+        targetBottomLeftMoving.decrementLifeSpan();
+        assertEquals(1, targetBottomLeftMoving.getLifeSpan());
+    }
+
+    @Test
+    public void testDecrementLifeSpanMultipleTimesDead() {
+        assertEquals(3, targetBottomLeftMoving.getLifeSpan());
+        targetBottomLeftMoving.decrementLifeSpan();
+        assertEquals(2, targetBottomLeftMoving.getLifeSpan());
+        targetBottomLeftMoving.decrementLifeSpan();
+        assertEquals(1, targetBottomLeftMoving.getLifeSpan());
+        targetBottomLeftMoving.decrementLifeSpan();
+        assertEquals(0, targetBottomLeftMoving.getLifeSpan());
+    }
+
 }

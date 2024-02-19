@@ -234,4 +234,20 @@ public class TargetsTest {
         assertEquals(3, targets.size());
         assertFalse(targets.isEmpty());
     }
+
+    @Test
+    public void testGetIndexOneTargetInTargetsArray() {
+        targets.addTarget(t1);
+        assertEquals(0, targets.getIndex(t1));
+    }
+
+    @Test
+    public void testGetIndexMultipleTargetsInTargetsArray() {
+        targets.addTarget(t1);
+        targets.addTarget(t2);
+        targets.addTarget(t3);
+        assertEquals(0, targets.getIndex(t1));
+        assertEquals(1, targets.getIndex(t2));
+        assertEquals(2, targets.getIndex(t3));
+    }
 }
