@@ -29,3 +29,5 @@ aim, in transitioning.
   and compare all of their statistics with each other
 - As a user, I want to be able to change the color, size, and speed (if the moving targets option is chosen) of the targets
 - As a user, I want to be able to view a graph of my individual session statistics and a graph of my lifetime statistics
+- As a user, I want to be able to stop the aim training session and have the option to save the state of session
+- As a user I want to be able to have the option to reload a previously state-saved aim training session and resume the session

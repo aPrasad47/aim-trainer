@@ -13,8 +13,8 @@ import java.util.concurrent.ThreadLocalRandom;
 
 
 public class AimTrainerConsole {
-    private static final int MAX_X = 51;
-    private static final int MAX_Y = 51;
+    private static final int MAX_X = 3;
+    private static final int MAX_Y = 3;
     private Scanner input;
     private Targets targets;
     private HitTargets hitTargets;
