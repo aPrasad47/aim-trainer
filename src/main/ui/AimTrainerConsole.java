@@ -5,16 +5,24 @@ Class AimTrainerConsole: represents the aim trainer in the console
  */
 
 import model.*;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.JsonReader;
+import persistence.JsonWriter;
+import persistence.Writable;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
 
-public class AimTrainerConsole {
-    private static final int MAX_X = 3;
-    private static final int MAX_Y = 3;
+public class AimTrainerConsole implements Writable {
+    private static final int MAX_X = 2;
+    private static final int MAX_Y = 2;
+    private static final String JSON_STORE = "./data/aimTrainerConsole.json";
     private Scanner input;
     private Targets targets;
     private HitTargets hitTargets;
@@ -23,15 +31,33 @@ public class AimTrainerConsole {
     private int hitAttempts;
     private int successfulHits;
     private double accuracy;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
+    private String name;
+    private boolean isMovingGame;
 
-    // EFFECTS: runs the aim trainer application
     public AimTrainerConsole() {
-        runAimTrainer();
+
+    }
+
+    public AimTrainerConsole(Targets targets, HitTargets hitTargets, NonHitTargets nonHitTargets, int score,
+                             int hitAttempts, int successfulHits, double accuracy, String name, boolean isMovingGame) {
+        this.targets = targets;
+        this.hitTargets = hitTargets;
+        this.nonHitTargets = nonHitTargets;
+        this.score = score;
+        this.hitAttempts = hitAttempts;
+        this.successfulHits = successfulHits;
+        this.accuracy = accuracy;
+        this.name = name;
+        this.isMovingGame = isMovingGame;
     }
 
     // MODIFIES: this
-    // EFFECTS: processes the user's input
-    private void runAimTrainer() {
+    // EFFECTS: runs the aim trainer application and processes the user's input
+    public void runAimTrainer() {
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         String command;
         initializeRound();
 
@@ -49,9 +75,16 @@ public class AimTrainerConsole {
     // EFFECTS: processes user command to select game mode
     private void processGameMode(String command) {
         if (command.equals("m")) {
-            playMovingGame();
+            playMovingGame(this);
+            isMovingGame = true;
         } else if (command.equals("s")) {
-            playStationaryGame();
+            playStationaryGame(this);
+            isMovingGame = false;
+        } else if (command.equals("sq")) {
+            saveSession();
+            quitGame();
+        } else if (command.equals("lr")) {
+            resumeSessionFromSave();
         } else {
             System.out.println("Selection not valid...");
         }
@@ -77,20 +110,59 @@ public class AimTrainerConsole {
         System.out.println("\nSelect your game mode:");
         System.out.println("\tm -> moving targets");
         System.out.println("\ts -> stationary targets");
+        System.out.println("\tsq -> save aim training session and quit");
+        System.out.println("\tlr -> load and resume previous aim training session");
         System.out.println("\tq -> quit");
+    }
+
+    // EFFECTS: saves the aim training session to file and quits
+    private void saveSession() {
+        try {
+            String sessionName = nameSession(this);
+            jsonWriter.open();
+            jsonWriter.write(this);
+            jsonWriter.close();
+            System.out.println("Saved " + sessionName + " to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // EFFECTS: loads and resumes the previous aim training session
+    public void resumeSessionFromSave() { //load the session, then
+        try {
+            AimTrainerConsole atc = jsonReader.read();
+            System.out.println("Loaded " + atc.getName() + " from " + JSON_STORE);
+            if (isMovingGame) {
+                playMovingGame(atc);
+            } else {
+                playStationaryGame(atc);
+            }
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
+    }
+
+    // EFFECTS: names session and returns name
+    private String nameSession(AimTrainerConsole atc) {
+        System.out.println("What would you like to name this session?");
+        String command = input.next();
+        atc.setName(command);
+        return command;
     }
 
     // MODIFIES: this
     // EFFECTS: plays the aim trainer with moving targets
     @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
-    private void playMovingGame() {
+    private void playMovingGame(AimTrainerConsole atc) {
         generateRandomMovingTargets();
         boolean quit = false;
-        while (!targets.isEmpty() && !quit) {
-            updateAccuracy();
-            System.out.println("\n Score: " + getScore() + ", Accuracy: " + getAccuracy());
+        while (!atc.getTargets().isEmpty() && !quit) {
+            atc.updateAccuracy();
+            System.out.println("\n Score: " + atc.getScore() + ", Accuracy: " + atc.getAccuracy());
             System.out.println("\nSelect a position (x, y) to shoot (0 <= x <= " + (MAX_X - 1)
-                    + ", 0 <= y <= " + (MAX_Y - 1) + "), or press q to quit:");
+                    + ", 0 <= y <= " + (MAX_Y - 1) + "), press s to save, press q to quit, "
+                    + "or press sq to save and quit:");
             System.out.println("x:");
             if (input.hasNextInt()) {
                 int coordX = input.nextInt();
@@ -99,7 +171,7 @@ public class AimTrainerConsole {
                     int coordY = input.nextInt();
                     if (validPosition(coordX, coordY)) {
                         Position targetPosition = new Position(coordX, coordY);
-                        shootMoving(targetPosition);
+                        atc.shootMoving(targetPosition);
                     } else {
                         System.out.println("\nPosition not valid...");
                     }
@@ -107,34 +179,47 @@ public class AimTrainerConsole {
                     String quitCommand = input.next().toLowerCase();
                     if (quitCommand.equals("q")) {
                         quit = true;
+                    } else if (quitCommand.equals("s")) {
+                        saveSession();
+                    } else if (quitCommand.equals("sq")) {
+                        saveSession();
+                        quit = true;
                     } else {
-                        System.out.println("\nInvalid input. Please enter integer coordinates or 'q' to quit.");
+                        System.out.println("\nInvalid input. Please enter integer coordinates, 's' to save, 'q' to "
+                                + "quit, or 'sq' to save and quit");
                     }
                 }
             } else {
                 String quitCommand = input.next().toLowerCase();
                 if (quitCommand.equals("q")) {
                     quit = true;
+                } else if (quitCommand.equals("s")) {
+                    saveSession();
+                } else if (quitCommand.equals("sq")) {
+                    saveSession();
+                    quit = true;
                 } else {
-                    System.out.println("\nInvalid input. Please enter integer coordinates or 'q' to quit.");
+                    System.out.println("\nInvalid input. Please enter integer coordinates, 's' to save, 'q' to "
+                            + "quit, or 'sq' to save and quit");
                 }
             }
             input.nextLine();
         }
-        quitGame();
+        atc.quitGame();
     }
 
     // MODIFIES: this
     // EFFECTS: plays the aim trainer with stationary targets
     @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
-    private void playStationaryGame() {
+    private void playStationaryGame(AimTrainerConsole atc) {
         generateRandomStationaryTargets();
         boolean quit = false;
-        while (!targets.isEmpty() && !quit) {
-            updateAccuracy();
-            System.out.println("\n Score: " + getScore() + ", Accuracy: " + getAccuracy());
+        while (!atc.getTargets().isEmpty() && !quit) {
+            atc.updateAccuracy();
+            System.out.println("\n Score: " + atc.getScore() + ", Accuracy: " + atc.getAccuracy());
             System.out.println("\nSelect a position (x, y) to shoot (0 <= x <= " + (MAX_X - 1)
-                    + ", 0 <= y <= " + (MAX_Y - 1) + "), or press q to quit:");
+                    + ", 0 <= y <= " + (MAX_Y - 1) + "), press s to save, press q to quit, "
+                    + "or press sq to save and quit:");
             System.out.println("x:");
             if (input.hasNextInt()) {
                 int coordX = input.nextInt();
@@ -143,7 +228,7 @@ public class AimTrainerConsole {
                     int coordY = input.nextInt();
                     if (validPosition(coordX, coordY)) {
                         Position targetPosition = new Position(coordX, coordY);
-                        shootStationary(targetPosition);
+                        atc.shootStationary(targetPosition);
                     } else {
                         System.out.println("\nPosition not valid...");
                     }
@@ -151,22 +236,36 @@ public class AimTrainerConsole {
                     String quitCommand = input.next().toLowerCase();
                     if (quitCommand.equals("q")) {
                         quit = true;
+                    } else if (quitCommand.equals("s")) {
+                        saveSession();
+                    } else if (quitCommand.equals("sq")) {
+                        saveSession();
+                        quit = true;
                     } else {
-                        System.out.println("\nInvalid input. Please enter integer coordinates or 'q' to quit.");
+                        System.out.println("\nInvalid input. Please enter integer coordinates, 's' to save, 'q' to "
+                                + "quit, or 'sq' to save and quit");
                     }
                 }
             } else {
                 String quitCommand = input.next().toLowerCase();
                 if (quitCommand.equals("q")) {
                     quit = true;
+                } else if (quitCommand.equals("s")) {
+                    saveSession();
+                } else if (quitCommand.equals("sq")) {
+                    saveSession();
+                    quit = true;
                 } else {
-                    System.out.println("\nInvalid input. Please enter integer coordinates or 'q' to quit.");
+                    System.out.println("\nInvalid input. Please enter integer coordinates, 's' to save, 'q' to "
+                            + "quit, or 'sq' to save and quit");
                 }
             }
             input.nextLine();
         }
-        quitGame();
+        atc.quitGame();
     }
+
+
 
     // EFFECTS: presents the end-of-game statistics
     private void quitGame() {
@@ -304,25 +403,123 @@ public class AimTrainerConsole {
         }
     }
 
-    private void incrementHitAttempts() {
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("targets", targetsToJson());
+        json.put("hit-targets", hitTargetsToJson());
+        json.put("non-hit-targets", nonHitTargetsToJson());
+        json.put("score", score);
+        json.put("hit-attempts", hitAttempts);
+        json.put("successful-hits", successfulHits);
+        json.put("accuracy", accuracy);
+        json.put("name", name);
+        json.put("is-moving-game", isMovingGame);
+        return json;
+    }
+
+    private JSONArray targetsToJson() {
+        JSONArray jsonArray = new JSONArray();
+        for (Target t : targets.getTargetsArray()) {
+            jsonArray.put(t.targetToJson());
+        }
+        return jsonArray;
+    }
+
+    private JSONArray hitTargetsToJson() {
+        JSONArray jsonArray = new JSONArray();
+        for (Target ht : hitTargets.getTargetsArray()) {
+            jsonArray.put(ht.targetToJson());
+        }
+        return jsonArray;
+    }
+
+    private JSONArray nonHitTargetsToJson() {
+        JSONArray jsonArray = new JSONArray();
+        for (Target ht : nonHitTargets.getTargetsArray()) {
+            jsonArray.put(ht.targetToJson());
+        }
+        return jsonArray;
+    }
+
+    public void incrementHitAttempts() {
         hitAttempts++;
     }
 
-    private void incrementSuccessfulHits() {
+    public void incrementSuccessfulHits() {
         successfulHits++;
     }
 
-    private void incrementScore() {
+    public void incrementScore() {
         score++;
     }
 
-    private int getScore() {
+    public int getScore() {
         return score;
     }
 
-    private double getAccuracy() {
+    public double getAccuracy() {
         return accuracy;
     }
 
+    public Targets getTargets() {
+        return targets;
+    }
+
+    public HitTargets getHitTargets() {
+        return hitTargets;
+    }
+
+    public NonHitTargets getNonHitTargets() {
+        return nonHitTargets;
+    }
+
+    public int getHitAttempts() {
+        return hitAttempts;
+    }
+
+    public int getSuccessfulHits() {
+        return successfulHits;
+    }
+
+    public boolean getIsMovingGame() {
+        return isMovingGame;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public void setAccuracy(double accuracy) {
+        this.accuracy = accuracy;
+    }
+
+    public void setHitAttempts(int hitAttempts) {
+        this.hitAttempts = hitAttempts;
+    }
+
+    public void setSuccessfulHits(int successfulHits) {
+        this.successfulHits = successfulHits;
+    }
+
+    public void setTargets(Targets targets) {
+        this.targets = targets;
+    }
+
+    public void setHitTargets(HitTargets hitTargets) {
+        this.hitTargets = hitTargets;
+    }
+
+    public void setNonHitTargets(NonHitTargets nonHitTargets) {
+        this.nonHitTargets = nonHitTargets;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
 
 }

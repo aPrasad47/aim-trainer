@@ -6,6 +6,8 @@ Class Target: represents a target with a position,
               and a lifespan, in the game space
  */
 
+import org.json.JSONObject;
+
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Target {
@@ -103,6 +105,17 @@ public class Target {
         );
     }
 
+    public JSONObject targetToJson() {
+        JSONObject json = new JSONObject();
+        json.put("positionX", position.getX());
+        json.put("positionY", position.getY());
+        json.put("hit", hit);
+        json.put("moving", moving);
+        json.put("attemptsToHit", numAttemptsToHit);
+        json.put("lifespan", lifeSpan);
+        return json;
+    }
+
     public Position getPosition() {
         return position;
     }
@@ -121,5 +134,13 @@ public class Target {
 
     public int getLifeSpan() {
         return lifeSpan;
+    }
+
+    public void setNumAttemptsToHit(int numAttemptsToHit) {
+        this.numAttemptsToHit = numAttemptsToHit;
+    }
+
+    public void setLifeSpan(int lifeSpan) {
+        this.lifeSpan = lifeSpan;
     }
 }

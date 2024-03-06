@@ -1,0 +1,43 @@
+{
+    "hit-attempts": 3,
+    "score": 1,
+    "hit-targets": [{
+        "positionY": 0,
+        "hit": true,
+        "lifespan": 3,
+        "attemptsToHit": 1,
+        "moving": false,
+        "positionX": 1
+    }],
+    "name": "hello",
+    "accuracy": 33.33333333333333,
+    "is-moving-game": false,
+    "successful-hits": 1,
+    "targets": [
+        {
+            "positionY": 1,
+            "hit": false,
+            "lifespan": 1,
+            "attemptsToHit": 1,
+            "moving": false,
+            "positionX": 1
+        },
+        {
+            "positionY": 1,
+            "hit": false,
+            "lifespan": 1,
+            "attemptsToHit": 1,
+            "moving": false,
+            "positionX": 1
+        },
+        {
+            "positionY": 0,
+            "hit": false,
+            "lifespan": 1,
+            "attemptsToHit": 1,
+            "moving": true,
+            "positionX": 1
+        }
+    ],
+    "non-hit-targets": []
+}
