@@ -54,7 +54,7 @@ public class JsonReader {
                 score, hitAttempts, successfulHits, accuracy, name, isMovingGame);
     }
 
-    // MODIFIES: atc
+    // MODIFIES: this
     // EFFECTS: parses targets from JSON object and adds it to AimTrainerConsole
     private Targets addTargets(JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("targets");
@@ -67,40 +67,42 @@ public class JsonReader {
         return targets;
     }
 
+    // MODIFIES: this
+    // EFFECTS: parses is-moving-game from JSON object and adds it to AimTrainerConsole
     private boolean addIsMovingGame(JSONObject jsonObject) {
         boolean isMovingGame = jsonObject.getBoolean("is-moving-game");
         return isMovingGame;
     }
 
-    // MODIFIES: atc
-    // EFFECTS: parses hit attempts from JSON object and adds it to AimTrainerConsole
+    // MODIFIES: this
+    // EFFECTS: parses hit-attempts from JSON object and adds it to AimTrainerConsole
     private int addHitAttempts(JSONObject jsonObject) {
         int hitAttempts = jsonObject.getInt("hit-attempts");
         return hitAttempts;
     }
 
-    // MODIFIES: atc
-    // EFFECTS: parses successful hits from JSON object and adds it to AimTrainerConsole
+    // MODIFIES: this
+    // EFFECTS: parses successful-hits from JSON object and adds it to AimTrainerConsole
     private int addSuccessfulHits(JSONObject jsonObject) {
         int successfulHits = jsonObject.getInt("successful-hits");
         return successfulHits;
     }
 
-    // MODIFIES: atc
+    // MODIFIES: this
     // EFFECTS: parses score from JSON object and adds it to AimTrainerConsole
     private int addScore(JSONObject jsonObject) {
         int score = jsonObject.getInt("score");
         return score;
     }
 
-    // MODIFIES: atc
+    // MODIFIES: this
     // EFFECTS: parses accuracy from JSON object and adds it to AimTrainerConsole
     private double addAccuracy(JSONObject jsonObject) {
         double accuracy = jsonObject.getDouble("accuracy");
         return accuracy;
     }
 
-    // MODIFIES: atc
+    // MODIFIES: this
     // EFFECTS: parses hit-targets from JSON object and adds it to AimTrainerConsole
     private HitTargets addHitTargets(JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("hit-targets");
@@ -120,7 +122,7 @@ public class JsonReader {
         return name;
     }
 
-    // MODIFIES: atc
+    // MODIFIES: this
     // EFFECTS: parses non-hit-targets from JSON object and adds it to AimTrainerConsole
     private NonHitTargets addNonHitTargets(JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("non-hit-targets");
@@ -133,6 +135,7 @@ public class JsonReader {
         return nonHitTargets;
     }
 
+    // EFFECTS: parses target from JSON object and adds it to AimTrainerConsole
     private Target convertToTarget(JSONObject jsonObject) {
         int positionX = jsonObject.getInt("positionX");
         int positionY = jsonObject.getInt("positionY");
@@ -146,6 +149,7 @@ public class JsonReader {
         return returnTarget;
     }
 
+    // EFFECTS: parses hit target from JSON object and adds it to AimTrainerConsole
     private Target convertToHitTarget(JSONObject jsonObject) {
         int positionX = jsonObject.getInt("positionX");
         int positionY = jsonObject.getInt("positionY");
@@ -160,6 +164,7 @@ public class JsonReader {
         return returnHitTarget;
     }
 
+    // EFFECTS: parses non hit target from JSON object and adds it to AimTrainerConsole
     private Target convertToNonHitTarget(JSONObject jsonObject) {
         int positionX = jsonObject.getInt("positionX");
         int positionY = jsonObject.getInt("positionY");

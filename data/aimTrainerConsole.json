@@ -1,23 +1,33 @@
 {
     "hit-attempts": 3,
-    "score": 1,
-    "hit-targets": [{
-        "positionY": 0,
-        "hit": true,
-        "lifespan": 3,
-        "attemptsToHit": 1,
-        "moving": false,
-        "positionX": 1
-    }],
-    "name": "hello",
-    "accuracy": 33.33333333333333,
+    "score": 2,
+    "hit-targets": [
+        {
+            "positionY": 0,
+            "hit": true,
+            "lifespan": 3,
+            "attemptsToHit": 1,
+            "moving": false,
+            "positionX": 1
+        },
+        {
+            "positionY": 1,
+            "hit": true,
+            "lifespan": 3,
+            "attemptsToHit": 1,
+            "moving": false,
+            "positionX": 0
+        }
+    ],
+    "name": "ethaniel",
+    "accuracy": 66.66666666666666,
     "is-moving-game": false,
-    "successful-hits": 1,
+    "successful-hits": 2,
     "targets": [
         {
             "positionY": 1,
             "hit": false,
-            "lifespan": 1,
+            "lifespan": 2,
             "attemptsToHit": 1,
             "moving": false,
             "positionX": 1
@@ -25,15 +35,15 @@
         {
             "positionY": 1,
             "hit": false,
-            "lifespan": 1,
+            "lifespan": 2,
             "attemptsToHit": 1,
-            "moving": false,
+            "moving": true,
             "positionX": 1
         },
         {
-            "positionY": 0,
+            "positionY": 1,
             "hit": false,
-            "lifespan": 1,
+            "lifespan": 2,
             "attemptsToHit": 1,
             "moving": true,
             "positionX": 1
