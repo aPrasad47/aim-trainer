@@ -270,12 +270,12 @@ public class JsonWriterTest extends JsonTest {
 
             GameOverScreen gameOverScreen = new GameOverScreen(2, 50.0, gamePanel);
 
-            JsonWriter writer = new JsonWriter("./data/savedSessions/testWriterGeneralStationaryAimTrainingSessionGUI.json");
+            JsonWriter writer = new JsonWriter("./data/testWriterGeneralStationaryAimTrainingSessionGUI.json");
             writer.open();
             writer.write(gameOverScreen);
             writer.close();
 
-            JsonReader reader = new JsonReader("./data/savedSessions/testWriterGeneralStationaryAimTrainingSessionGUI.json");
+            JsonReader reader = new JsonReader("./data/testWriterGeneralStationaryAimTrainingSessionGUI.json");
             gamePanel = reader.readGamePanel();
             checkGamePanel(2, 4, 2, 50.0, "stationary",
                     false, gamePanel);
@@ -363,12 +363,12 @@ public class JsonWriterTest extends JsonTest {
 
             GameOverScreen gameOverScreen = new GameOverScreen(2, 50.0, gamePanel);
 
-            JsonWriter writer = new JsonWriter("./data/savedSessions/testWriterGeneralMovingAimTrainingSessionGUI.json");
+            JsonWriter writer = new JsonWriter("./data/testWriterGeneralMovingAimTrainingSessionGUI.json");
             writer.open();
             writer.write(gameOverScreen);
             writer.close();
 
-            JsonReader reader = new JsonReader("./data/savedSessions/testWriterGeneralMovingAimTrainingSessionGUI.json");
+            JsonReader reader = new JsonReader("./data/testWriterGeneralMovingAimTrainingSessionGUI.json");
             gamePanel = reader.readGamePanel();
             checkGamePanel(2, 4, 2, 50.0, "moving",
                     true, gamePanel);
