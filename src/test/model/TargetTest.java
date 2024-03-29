@@ -354,7 +354,37 @@ public class TargetTest {
 
     @Test
     public void testIncrementTargetSize() {
-
+        assertEquals(2, targetTopRightMoving.getTargetSize());
+        targetTopRightMoving.incrementTargetSize();
+        assertEquals(3, targetTopRightMoving.getTargetSize());
     }
+
+    @Test
+    public void testDecrementTargetSize() {
+        targetTopRightMoving.incrementTargetSize();
+        assertEquals(3, targetTopRightMoving.getTargetSize());
+        targetTopRightMoving.decrementTargetSize();
+        assertEquals(2, targetTopRightMoving.getTargetSize());
+    }
+
+    @Test
+    public void testSetShouldIncreaseSize() {
+        assertTrue(targetTopRightMoving.getShouldIncreaseSize());
+        targetTopRightMoving.setShouldIncreaseSize(false);
+        assertFalse(targetTopRightMoving.getShouldIncreaseSize());
+    }
+
+    @Test
+    public void testSetSpeedX() {
+        targetTopRightMoving.setSpeedX(10);
+        assertEquals(10, targetTopRightMoving.getSpeedX());
+    }
+
+    @Test
+    public void testSetSpeedY() {
+        targetTopRightMoving.setSpeedY(10);
+        assertEquals(10, targetTopRightMoving.getSpeedY());
+    }
+
 
 }
