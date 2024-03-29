@@ -1,0 +1,62 @@
+{
+    "hit-attempts": 4,
+    "score": 2,
+    "hit-targets": [
+        {
+            "positionY": 99,
+            "hit": true,
+            "lifespan": 2,
+            "attemptsToHit": 2,
+            "moving": false,
+            "positionX": 100
+        },
+        {
+            "positionY": 122,
+            "hit": true,
+            "lifespan": 1,
+            "attemptsToHit": 2,
+            "moving": false,
+            "positionX": 14
+        }
+    ],
+    "name": "stationary",
+    "accuracy": 50,
+    "is-moving-game": false,
+    "successful-hits": 2,
+    "targets": [
+        {
+            "positionY": 3,
+            "hit": false,
+            "lifespan": 3,
+            "attemptsToHit": 1,
+            "moving": false,
+            "positionX": 1
+        },
+        {
+            "positionY": 9,
+            "hit": false,
+            "lifespan": 3,
+            "attemptsToHit": 1,
+            "moving": false,
+            "positionX": 5
+        }
+    ],
+    "non-hit-targets": [
+        {
+            "positionY": 22,
+            "hit": false,
+            "lifespan": 0,
+            "attemptsToHit": 0,
+            "moving": false,
+            "positionX": 10
+        },
+        {
+            "positionY": 0,
+            "hit": false,
+            "lifespan": 0,
+            "attemptsToHit": 0,
+            "moving": false,
+            "positionX": 43
+        }
+    ]
+}
