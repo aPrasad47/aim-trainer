@@ -39,6 +39,8 @@ public class JsonWriter {
         saveToFile(json.toString(TAB));
     }
 
+    // MODIFIES: this
+    // EFFECTS: writes JSON representation of workroom to file
     public void write(AimTrainerConsole atc) {
         JSONObject json = atc.toJson();
         saveToFile(json.toString(TAB));
@@ -56,6 +58,7 @@ public class JsonWriter {
         writer.print(json);
     }
 
+    // EFFECTS: manages sessions in savedSessions folder
     public void manageSessions() {
         File directory = new File(JSON_STORE);
 
@@ -67,10 +70,12 @@ public class JsonWriter {
         }
     }
 
+    // EFFECTS: sorts all JSON files in savedSessions folder from oldest to newest
     public void sortFilesOldestToNewest(File[] files) {
         Arrays.sort(files, Comparator.comparingLong(File::lastModified));
     }
 
+    // EFFECTS: handles adding new sessions to savedSessions folder
     public void handleAddingNewSession(File[] files) {
         if (files != null) {
             sortFilesOldestToNewest(files);
