@@ -31,3 +31,19 @@ aim, in transitioning.
 - As a user, I want to be able to view a graph of my individual session statistics and a graph of my lifetime statistics
 - As a user, I want to be able to stop the aim training session and have the option to save the state of session
 - As a user I want to be able to have the option to reload a previously state-saved aim training session and resume the session
+
+## Instructions For Grader
+- You can generate the first required action related to the user story "adding multiple Xs to a Y" by playing any game mode, and 
+  clicking a target, and this will add a Target (X) to a HitTargets (Y). 
+- You can generate the second required action related to the user story "adding multiple Xs to a Y" by pressing
+  the "Display All Hit Targets" button after finishing a game, and specifying the maximum target size to filter by, and
+  this will display all the targets (X) that have been hit and added to a HitTargets (Y). To view all the X's in the Y,
+  specify a value of 0 to filter by.
+- You can locate my visual component by playing any game mode, or pressing the Statistics button, then the View Progress button,
+  to view a bar graph of the progress made of the saved sessions. Note that the bars are sorted from newest saved session to
+  oldest saved session.
+- You can save the state of my application by pressing the Quit button during a game, or losing a game,
+  then pressing the Save Session button in the game over screen.
+- You can reload the state of my application by pressing the Statistics button, then pressing the
+  View Previous Session button. This will load the state and show the statistics and info associated with the most recent saved session.
+  
