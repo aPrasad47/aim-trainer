@@ -41,7 +41,7 @@ public class AimTrainerConsole implements Writable {
     }
 
     public AimTrainerConsole(Targets targets, HitTargets hitTargets, NonHitTargets nonHitTargets, int score,
-                             int hitAttempts, int successfulHits, double accuracy, String name, boolean isMovingGame) {
+                            int hitAttempts, int successfulHits, double accuracy, String name, boolean isMovingGame) {
         this.targets = targets;
         this.hitTargets = hitTargets;
         this.nonHitTargets = nonHitTargets;
@@ -120,7 +120,7 @@ public class AimTrainerConsole implements Writable {
         try {
             String sessionName = nameSession(this);
             jsonWriter.open();
-            jsonWriter.write(this);
+            //jsonWriter.write(this);
             jsonWriter.close();
             System.out.println("Saved " + sessionName + " to " + JSON_STORE);
         } catch (FileNotFoundException e) {

@@ -7,7 +7,9 @@ Class Target: represents a target with a position,
  */
 
 import org.json.JSONObject;
+import ui.GameWindowConstants;
 
+import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Target {
@@ -18,16 +20,27 @@ public class Target {
     private final boolean moving;
     private int numAttemptsToHit;
     private int lifeSpan;
+    private int targetSize;
+    private boolean shouldIncreaseSize;
+    private int speedX;
+    private int speedY;
+
+    private GameWindowConstants gameWindowConstants = new GameWindowConstants();
 
     // EFFECTS: constructs a target object with a position, a hit
     //          attribute, a moving attribute, the number of attempts
     //          to hit the target, and a lifespan of the target
     public Target(Position position, boolean moving) {
+        Random random = new Random();
         this.position = position;
         hit = false;
         this.moving = moving;
         numAttemptsToHit = 1;
         lifeSpan = TARGET_LIFESPAN;
+        targetSize = gameWindowConstants.getMinTargetRadius();
+        shouldIncreaseSize = true;
+        speedX = gameWindowConstants.getTargetSpeedDx();
+        speedY = gameWindowConstants.getTargetSpeedDy();
     }
 
     // for HitTargets tests and NonHitTargets tests
@@ -142,5 +155,41 @@ public class Target {
 
     public void setLifeSpan(int lifeSpan) {
         this.lifeSpan = lifeSpan;
+    }
+
+    public int getTargetSize() {
+        return targetSize;
+    }
+
+    public void incrementTargetSize() {
+        targetSize++;
+    }
+
+    public void decrementTargetSize() {
+        targetSize--;
+    }
+
+    public boolean getShouldIncreaseSize() {
+        return shouldIncreaseSize;
+    }
+
+    public void setShouldIncreaseSize(boolean shouldIncreaseSize) {
+        this.shouldIncreaseSize = shouldIncreaseSize;
+    }
+
+    public int getSpeedX() {
+        return speedX;
+    }
+
+    public int getSpeedY() {
+        return speedY;
+    }
+
+    public void setSpeedX(int speedX) {
+        this.speedX = speedX;
+    }
+
+    public void setSpeedY(int speedY) {
+        this.speedY = speedY;
     }
 }
