@@ -1,5 +1,9 @@
 package ui;
 
+/*
+GameWindowConstants class: represents all the constants of the game when a game is played
+ */
+
 
 import java.awt.*;
 import java.util.Random;
@@ -13,7 +17,7 @@ public class GameWindowConstants {
     private static int MIN_TARGET_RADIUS = 2;
     private static int MAX_LIVES = 3;
     private static Color TARGET_COLOR = Color.RED;
-    private static Color FRAME_COLOR = Color.WHITE;
+    private static Color FRAME_COLOR = Color.BLACK;
     private static int MAX_TARGET_SPEED_DX = 5;
     private static int MIN_TARGET_SPEED_DX = -5;
     private static int MAX_TARGET_SPEED_DY = 5;

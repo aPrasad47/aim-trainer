@@ -1,5 +1,10 @@
 package ui;
 
+/*
+TargetMaxSpeedSettings class: represents the target max speed settings of the aim trainer, to alter the max speed of
+                             the targets
+ */
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,6 +17,10 @@ public class TargetMaxSpeedSettings extends JFrame implements ActionListener {
 
     private GameWindowConstants gameWindowConstants = new GameWindowConstants();
 
+    // MODIFIES: this
+    // EFFECTS: constructs a TargetMaxSizeSettings, and initializes the target max speed settings window, the target max
+    //          speed settings window buttons, and adds the target max speed settings window buttons to the target max
+    //          speed settings window
     public TargetMaxSpeedSettings() {
         initializeTargetMaxSpeedSettingsWindow();
         initializeTargetMaxSpeedSettingsWindowButtons();
@@ -20,6 +29,8 @@ public class TargetMaxSpeedSettings extends JFrame implements ActionListener {
         this.setVisible(true);
     }
 
+    // MODIFIES: this
+    // EFFECTS: initializes the target max speed settings window
     public void initializeTargetMaxSpeedSettingsWindow() {
         int windowWidth = InitializationConstants.WINDOW_WIDTH;
         int windowHeight = InitializationConstants.WINDOW_HEIGHT;
@@ -32,6 +43,7 @@ public class TargetMaxSpeedSettings extends JFrame implements ActionListener {
         this.setTitle("Change Max Target Speed");
     }
 
+    // MODIFIES: increaseTargetMaxSpeedButton, decreaseTargetMaxSpeedButton, currentTargetMaxSpeedButton, backButton
     public void initializeTargetMaxSpeedSettingsWindowButtons() {
         int windowWidth = InitializationConstants.WINDOW_WIDTH;
         int buttonWidth = InitializationConstants.BUTTON_WIDTH + 20;
@@ -55,6 +67,8 @@ public class TargetMaxSpeedSettings extends JFrame implements ActionListener {
         backButton.addActionListener(this);
     }
 
+    // MODIFIES: this
+    // EFFECTS: adds target max size settings window buttons to target max size settings window
     public void addButtonsToTargetMaxSpeedSettingsWindow() {
         this.add(increaseTargetMaxSpeedButton);
         this.add(decreaseTargetMaxSpeedButton);
@@ -62,6 +76,10 @@ public class TargetMaxSpeedSettings extends JFrame implements ActionListener {
         this.add(backButton);
     }
 
+    // MODIFIES: this
+    // EFFECTS: if increase or decrease button is pressed, increases or decreases max target speed
+    //          if current target max speed button is pressed, shows current target max speed
+    //          if backButton is pressed, disposes this, and constructs a new Settings
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == increaseTargetMaxSpeedButton) {
@@ -81,6 +99,8 @@ public class TargetMaxSpeedSettings extends JFrame implements ActionListener {
         }
     }
 
+    // MODIFIES: gameWindowConstants
+    // EFFECTS: handles the increase of max target speed
     public void handleIncreaseMaxTargetSpeed() {
         gameWindowConstants.setMaxTargetSpeedDx(gameWindowConstants.getMaxTargetSpeedDx() + 1);
         gameWindowConstants.setMinTargetSpeedDx(gameWindowConstants.getMaxTargetSpeedDx() * -1);
@@ -93,6 +113,8 @@ public class TargetMaxSpeedSettings extends JFrame implements ActionListener {
                 gameWindowConstants.getMaxTargetSpeedDy());
     }
 
+    // MODIFIES: gameWindowConstants
+    // EFFECTS: handles the decrease of max target speed
     public void handleDecreaseMaxTargetSpeed() {
         gameWindowConstants.setMaxTargetSpeedDx(gameWindowConstants.getMaxTargetSpeedDx() - 1);
         gameWindowConstants.setMinTargetSpeedDx(gameWindowConstants.getMaxTargetSpeedDx() * -1);

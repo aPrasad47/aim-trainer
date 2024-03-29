@@ -39,7 +39,7 @@ public class JsonWriterTest extends JsonTest {
             writer.close();
 
             JsonReader reader = new JsonReader("./data/testWriterFirstQuitAimTrainingSession.json");
-            atc = reader.read();
+            atc = reader.readAimTrainerConsole();
             checkAimTrainerConsole(0, 0, 0, 100.0, "First Quit",
                     false, atc);
             ArrayList<Target> targets = atc.getTargets().getTargetsArray();
@@ -99,7 +99,7 @@ public class JsonWriterTest extends JsonTest {
             writer.close();
 
             JsonReader reader = new JsonReader("./data/testWriterGeneralMovingAimTrainingSession.json");
-            atc = reader.read();
+            atc = reader.readAimTrainerConsole();
             checkAimTrainerConsole(2, 4, 2, 50.0, "moving",
                     true, atc);
             ArrayList<Target> targetsRead = atc.getTargets().getTargetsArray();
@@ -181,7 +181,7 @@ public class JsonWriterTest extends JsonTest {
             writer.close();
 
             JsonReader reader = new JsonReader("./data/testWriterGeneralStationaryAimTrainingSession.json");
-            atc = reader.read();
+            atc = reader.readAimTrainerConsole();
             checkAimTrainerConsole(2, 4, 2, 50.0, "stationary",
                     false, atc);
             ArrayList<Target> targetsRead = atc.getTargets().getTargetsArray();

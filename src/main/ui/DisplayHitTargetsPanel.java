@@ -1,5 +1,9 @@
 package ui;
 
+/*
+DisplayHitTargetsPanel class: represents a panel that displays all the hit targets
+ */
+
 import model.Target;
 
 import javax.swing.*;
@@ -11,6 +15,7 @@ public class DisplayHitTargetsPanel extends JPanel {
 
     private GameWindowConstants gameWindowConstants = new GameWindowConstants();
 
+    // EFFECTS: constructs a DisplayHitTargetsPanel, with a GamePanel and a maxTargetSize
     public DisplayHitTargetsPanel(GamePanel gamePanel, int maxTargetSize) {
         this.gamePanel = gamePanel;
         this.maxTargetSize = maxTargetSize;
@@ -19,6 +24,7 @@ public class DisplayHitTargetsPanel extends JPanel {
         this.setDoubleBuffered(true);
     }
 
+    // EFFECTS: paints targets on to frame
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -31,6 +37,7 @@ public class DisplayHitTargetsPanel extends JPanel {
         }
     }
 
+    // EFFECTS: paints (displays) all hit targets on to frame
     public void displayAllHitTargets(Graphics2D g2d) {
         for (Target hitTarget : gamePanel.getHitTargets().getTargetsArray()) {
             int targetX = hitTarget.getPosition().getX();
@@ -41,6 +48,7 @@ public class DisplayHitTargetsPanel extends JPanel {
         }
     }
 
+    // EFFECTS: paints (displays) all hit targets on to frame, filtered by radius <= maxTargetSize
     public void displayFilteredHitTargets(Graphics2D g2d) {
         for (Target hitTarget : gamePanel.getHitTargets().getTargetsArray()) {
             int targetX = hitTarget.getPosition().getX();
@@ -53,6 +61,7 @@ public class DisplayHitTargetsPanel extends JPanel {
         }
     }
 
+    // EFFECTS: draws target given an x position, y position, and radius, and (x,y) is the center of the target
     public void drawTarget(Graphics2D g2d, int targetX, int targetY, int radius) {
         g2d.setColor(GameWindowConstants.getTargetColor());
         g2d.fillOval(targetX - radius, targetY - radius, 2 * radius, 2 * radius);

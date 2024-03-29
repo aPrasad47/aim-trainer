@@ -15,7 +15,7 @@ import java.util.Comparator;
 // Represents a writer that writes JSON representation of workroom to file
 public class JsonWriter {
     private static final String JSON_STORE = "./data/savedSessions";
-    private static final int MAX_SESSIONS = 2;
+    private static final int MAX_SESSIONS = 10;
     private static final int TAB = 4;
     private PrintWriter writer;
     private final String directory;

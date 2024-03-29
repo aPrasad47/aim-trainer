@@ -1,6 +1,8 @@
 package ui;
 
-import javax.swing.*;
+/*
+Main class: to run the application
+ */
 
 public class Main {
 

@@ -1,5 +1,11 @@
 package ui;
 
+/*
+TargetMaxSizeSettings class: represents the target max size settings of the aim trainer, to alter the max size of
+                             the targets
+ */
+
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,6 +18,10 @@ public class TargetMaxSizeSettings extends JFrame implements ActionListener {
 
     private GameWindowConstants gameWindowConstants = new GameWindowConstants();
 
+    // MODIFIES: this
+    // EFFECTS: constructs a TargetMaxSizeSettings, and initializes the target max size settings window, the target max
+    //          size settings window buttons, and adds the target max size settings window buttons to the target max
+    //          size settings window
     public TargetMaxSizeSettings() {
         initializeTargetMaxSizeSettingsWindow();
         initializeTargetMaxSizeSettingsWindowButtons();
@@ -20,6 +30,8 @@ public class TargetMaxSizeSettings extends JFrame implements ActionListener {
         this.setVisible(true);
     }
 
+    // MODIFIES: this
+    // EFFECTS: initializes the target max size settings window
     public void initializeTargetMaxSizeSettingsWindow() {
         int windowWidth = InitializationConstants.WINDOW_WIDTH;
         int windowHeight = InitializationConstants.WINDOW_HEIGHT;
@@ -32,6 +44,7 @@ public class TargetMaxSizeSettings extends JFrame implements ActionListener {
         this.setTitle("Change Max Target Size");
     }
 
+    // MODIFIES: increaseTargetMaxSizeButton, decreaseTargetMaxSizeButton, currentTargetMaxSizeButton, backButton
     public void initializeTargetMaxSizeSettingsWindowButtons() {
         int windowWidth = InitializationConstants.WINDOW_WIDTH;
         int buttonWidth = InitializationConstants.BUTTON_WIDTH;
@@ -55,6 +68,8 @@ public class TargetMaxSizeSettings extends JFrame implements ActionListener {
         backButton.addActionListener(this);
     }
 
+    // MODIFIES: this
+    // EFFECTS: adds target max size settings window buttons to target max size settings window
     public void addButtonsToTargetMaxSizeSettingsWindow() {
         this.add(increaseTargetMaxSizeButton);
         this.add(decreaseTargetMaxSizeButton);
@@ -62,6 +77,10 @@ public class TargetMaxSizeSettings extends JFrame implements ActionListener {
         this.add(backButton);
     }
 
+    // MODIFIES: this, gameWindowConstants
+    // EFFECTS: if increase or decrease button is pressed, increases or decreases max target size
+    //          if current target max size button is pressed, shows current target max size
+    //          if backButton is pressed, disposes this, and constructs a new Settings
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == increaseTargetMaxSizeButton) {
@@ -76,7 +95,7 @@ public class TargetMaxSizeSettings extends JFrame implements ActionListener {
             JOptionPane.showMessageDialog(this,
                     "Current Max Target Size: " + gameWindowConstants.getMaxTargetRadius());
         } else if (e.getSource() == backButton) {
-            dispose();
+            this.dispose();
             new Settings();
         }
     }

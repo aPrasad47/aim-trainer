@@ -1,5 +1,9 @@
 package ui;
 
+/*
+GameModeSelector class: represents a game mode selector window with buttons to select the type of game
+ */
+
 import javax.swing.*;
 import static javax.swing.WindowConstants.*;
 import java.awt.event.ActionEvent;
@@ -17,6 +21,8 @@ public class GameModeSelector implements ActionListener {
 
     private JLabel selectYourGameModeLabel;
 
+    // MODIFIES: gameModeSelectorWindow
+    // EFFECTS: constructs a GameModeSelector, and initializes the gameModeSelectorWindow with buttons
     public GameModeSelector() {
         initializeGameModeSelectorWindow();
         initializeGameModeSelectorButtons();
@@ -26,6 +32,8 @@ public class GameModeSelector implements ActionListener {
 
     }
 
+    // MODIFIES: gameModeSelectorWindow
+    // EFFECTS: sets up gameModeSelectorWindow
     public void initializeGameModeSelectorWindow() {
         gameModeSelectorWindow = new JFrame("Aim Trainer - Game Mode Selection");
         gameModeSelectorWindow.setSize(InitializationConstants.WINDOW_WIDTH, InitializationConstants.WINDOW_HEIGHT);
@@ -43,6 +51,8 @@ public class GameModeSelector implements ActionListener {
         gameModeSelectorWindow.add(selectYourGameModeLabel);
     }
 
+    // MODIFIES: stationaryGameModeButton, movingGameModeButton, returnToMainMenuButton
+    // EFFECTS: sets up stationaryGameModeButton, movingGameModeButton, and returnToMainMenuButton buttons
     public void initializeGameModeSelectorButtons() {
         stationaryGameModeButton = new JButton("Stationary Targets");
         stationaryGameModeButton.setBounds((InitializationConstants.WINDOW_WIDTH
@@ -67,12 +77,21 @@ public class GameModeSelector implements ActionListener {
         returnToMainMenuButton.addActionListener(this);
     }
 
+    // MODIFIES: gameModeSelectorWindow
+    // EFFECTS: adds stationaryGameModeButton, movingGameModeButton, and returnToMainMenuButton buttons to
+    //          gameModeSelectorWindow
     public void addGameModeSelectorButtonsToGameModeSelectorWindow() {
         gameModeSelectorWindow.add(stationaryGameModeButton);
         gameModeSelectorWindow.add(movingGameModeButton);
         gameModeSelectorWindow.add(returnToMainMenuButton);
     }
 
+    // MODIFIES: gameModeSelectorWindow
+    // EFFECTS: if stationaryGameModeButton is pressed, disposes gameModeSelectorWindow and constructs a new
+    //          AimTrainerGUI with a false arg.,
+    //          if movingGameModeButton is pressed, disposes gameModeSelectorWindow and constructs a new AimTrainerGUI
+    //          with a true arg.,
+    //          if returnToMainMenuButton is pressed, disposes gameModeSelectorWindow and constructs a new MainMenu
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == stationaryGameModeButton) {

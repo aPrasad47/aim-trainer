@@ -1,9 +1,12 @@
 package ui;
 
+/*
+GameOverScreen class: represent a game over screen, where a user can save their session
+ */
+
 import model.Target;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import persistence.JsonReader;
 import persistence.JsonWriter;
 import persistence.Writable;
 
@@ -21,6 +24,9 @@ public class GameOverScreen extends JFrame implements ActionListener, Writable {
     private JButton displayAllHitTargetsOnScreenButton;
     private JButton returnToMainMenuButton;
 
+    private int score;
+    private double accuracy;
+
     private JFrame displayAllHitTargetsWindow;
 
     private GameWindowConstants gameWindowConstants = new GameWindowConstants();
@@ -28,9 +34,12 @@ public class GameOverScreen extends JFrame implements ActionListener, Writable {
     private GamePanel gamePanel;
 
     private JsonWriter jsonWriter;
-    private JsonReader jsonReader;
 
+    // MODIFIES: this
+    // EFFECTS: constructs a GameOverScreen with a score, accuracy, and a GamePanel
     public GameOverScreen(int score, double accuracy, GamePanel gamePanel) {
+        this.score = score;
+        this.accuracy = accuracy;
         this.gamePanel = gamePanel;
 
         this.setTitle("Game Over!");
@@ -45,7 +54,9 @@ public class GameOverScreen extends JFrame implements ActionListener, Writable {
         setVisible(true);
     }
 
-    private void initializeGameOverScreenComponents(int score, double accuracy) {
+    // MODIFIES: scoreLabel, accuracyLabel, saveButton, displayAllHitTargetsOnScreenButton, returnToMainMenuButton, this
+    // EFFECTS: sets up GameOverScreen components and adds them to this
+    public void initializeGameOverScreenComponents(int score, double accuracy) {
         int windowWidth = InitializationConstants.WINDOW_WIDTH;
         int buttonWidth = InitializationConstants.BUTTON_WIDTH;
         int buttonHeight = InitializationConstants.BUTTON_HEIGHT;
@@ -75,6 +86,11 @@ public class GameOverScreen extends JFrame implements ActionListener, Writable {
         this.add(returnToMainMenuButton);
     }
 
+    // MODIFIES: this
+    // EFFECTS: if saveButton is pressed, disposes this, saves sessions, and constructs a new MainMenu,
+    //          if displayAllHitTargetsOnScreenButton is pressed, disposes this, and displays all hit targets (filtered)
+    //          on a new frame,
+    //          if returnToMainMenuButton is pressed, disposes this, and constructs a new MainMenu
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == saveButton) {
@@ -91,6 +107,7 @@ public class GameOverScreen extends JFrame implements ActionListener, Writable {
         }
     }
 
+    // EFFECTS: returns an integer specified by the user
     public int promptForRadius() {
         String input = JOptionPane.showInputDialog(this,
                 "Enter Max Target Size To Filter By, 0 For All Targets to be Displayed:");
@@ -102,6 +119,8 @@ public class GameOverScreen extends JFrame implements ActionListener, Writable {
         }
     }
 
+    // MODIFIES: displayAllHitTargetsWindow
+    // EFFECTS: displays all hit targets on a new window, filtered by maxTargetSize
     public void displayAllHitTargetsOnScreen(int maxTargetSize) {
         initializeDisplayAllHitTargetsWindow();
 
@@ -113,6 +132,8 @@ public class GameOverScreen extends JFrame implements ActionListener, Writable {
         displayHitTargetsPanel.repaint();
     }
 
+    // MODIFIES: displayAllHitTargetsWindow
+    // EFFECTS: sets up displayAllHitTargetsWindow
     public void initializeDisplayAllHitTargetsWindow() {
         int windowWidth = GameWindowConstants.getGameWindowWidth();
         int windowHeight = GameWindowConstants.getGameWindowHeight();
@@ -127,11 +148,16 @@ public class GameOverScreen extends JFrame implements ActionListener, Writable {
         displayAllHitTargetsWindow.setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
-
+    // MODIFIES: gamePanel, jsonWriter
+    // EFFECTS: saves session to file
     public void saveSession() {
         try {
             String sessionName = nameSession();
             String jsonStorePath = JSON_STORE + "/" + sessionName;
+
+            String sessionNameInTime = sessionName.replaceAll("[^\\d]", "");
+
+            gamePanel.setName(sessionNameInTime);
 
             jsonWriter = new JsonWriter(jsonStorePath);
 
@@ -141,16 +167,19 @@ public class GameOverScreen extends JFrame implements ActionListener, Writable {
             jsonWriter.write(this);
             jsonWriter.close();
 
-            System.out.println("Saved " + sessionName + " to " + JSON_STORE);
+            JOptionPane.showMessageDialog(this, "Session Saved");
         } catch (FileNotFoundException e) {
-            System.out.println("Unable to write to file: " + JSON_STORE);
+            JOptionPane.showMessageDialog(this, "Error: Session Could Not Be Saved");
         }
     }
 
+    // EFFECTS: returns a session name specified by System.currentTimeMillis()
     public String nameSession() {
         return "session_" + System.currentTimeMillis() + ".json";
     }
 
+    // MODIFIES: json
+    // EFFECTS: maps gamePanel fields to json keys and values, then returns json
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
@@ -162,9 +191,11 @@ public class GameOverScreen extends JFrame implements ActionListener, Writable {
         json.put("successful-hits", gamePanel.getSuccessfulHits());
         json.put("accuracy", gamePanel.getAccuracy());
         json.put("is-moving-game", gamePanel.getIsMovingGame());
+        json.put("name", gamePanel.getName());
         return json;
     }
 
+    // EFFECTS: returns a jsonArray by converting a target array
     private JSONArray targetsToJson() {
         JSONArray jsonArray = new JSONArray();
         for (Target t : gamePanel.getTargets().getTargetsArray()) {
@@ -173,6 +204,7 @@ public class GameOverScreen extends JFrame implements ActionListener, Writable {
         return jsonArray;
     }
 
+    // EFFECTS: returns a jsonArray by converting a hit target array
     private JSONArray hitTargetsToJson() {
         JSONArray jsonArray = new JSONArray();
         for (Target ht : gamePanel.getHitTargets().getTargetsArray()) {
@@ -181,6 +213,7 @@ public class GameOverScreen extends JFrame implements ActionListener, Writable {
         return jsonArray;
     }
 
+    // EFFECTS: returns a jsonArray by converting a non-hit target array
     private JSONArray nonHitTargetsToJson() {
         JSONArray jsonArray = new JSONArray();
         for (Target ht : gamePanel.getNonHitTargets().getTargetsArray()) {
@@ -188,7 +221,4 @@ public class GameOverScreen extends JFrame implements ActionListener, Writable {
         }
         return jsonArray;
     }
-
-
-
 }

@@ -1,5 +1,9 @@
 package ui;
 
+/*
+TargetColorSettings class: represents the target color settings of the aim trainer, to alter the target colors
+ */
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -14,6 +18,10 @@ public class TargetColorSettings extends JFrame implements ActionListener {
 
     private GameWindowConstants gameWindowConstants = new GameWindowConstants();
 
+    // MODIFIES: this
+    // EFFECTS: constructs a TargetColorSettings, and initializes the target color settings window, the target color
+    //          settings window buttons, and adds the target color settings window buttons to the target color settings
+    //          window
     public TargetColorSettings() {
         initializeTargetColorSettingsWindow();
         initializeTargetColorSettingsWindowButtons();
@@ -22,6 +30,8 @@ public class TargetColorSettings extends JFrame implements ActionListener {
         this.setVisible(true);
     }
 
+    // MODIFIES: this
+    // EFFECTS: initializes the target color settings window
     public void initializeTargetColorSettingsWindow() {
         int windowWidth = InitializationConstants.WINDOW_WIDTH;
         int windowHeight = InitializationConstants.WINDOW_HEIGHT;
@@ -34,6 +44,7 @@ public class TargetColorSettings extends JFrame implements ActionListener {
         this.setTitle("Change Target Color");
     }
 
+    // MODIFIES: redButton, greenButton, blueButton, pinkButton, backButton
     public void initializeTargetColorSettingsWindowButtons() {
         int windowWidth = InitializationConstants.WINDOW_WIDTH;
         int buttonWidth = InitializationConstants.BUTTON_WIDTH;
@@ -61,6 +72,8 @@ public class TargetColorSettings extends JFrame implements ActionListener {
         backButton.addActionListener(this);
     }
 
+    // MODIFIES: this
+    // EFFECTS: adds target color settings window buttons to target color settings window
     public void addButtonsToTargetColorSettingsWindow() {
         this.add(redButton);
         this.add(greenButton);
@@ -69,6 +82,8 @@ public class TargetColorSettings extends JFrame implements ActionListener {
         this.add(backButton);
     }
 
+    // EFFECTS: if any colorButton is pressed, sets target color to that color,
+    //          if backButton is pressed, disposes this, and constructs a new Settings
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == redButton) {

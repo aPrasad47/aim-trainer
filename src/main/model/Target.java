@@ -39,8 +39,8 @@ public class Target {
         lifeSpan = TARGET_LIFESPAN;
         targetSize = gameWindowConstants.getMinTargetRadius();
         shouldIncreaseSize = true;
-        speedX = gameWindowConstants.getTargetSpeedDx();
-        speedY = gameWindowConstants.getTargetSpeedDy();
+        speedX = random.nextInt(11) - 5;
+        speedY = random.nextInt(11) - 5;
     }
 
     // for HitTargets tests and NonHitTargets tests

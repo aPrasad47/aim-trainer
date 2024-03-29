@@ -1,5 +1,9 @@
 package ui;
 
+/*
+Settings class: represents the settings of the aim trainer, to alter the game
+ */
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,6 +16,9 @@ public class Settings implements ActionListener {
     private JButton changeTargetSpeedButton;
     private JButton returnToMainMenuButton;
 
+    // MODIFIES: settingsWindow
+    // EFFECTS: constructs a Settings, and initializes the settings window, the settings window buttons, and adds
+    //          the settings window buttons to the settings window
     public Settings() {
         initializeSettingsWindow();
         initializeSettingsButtons();
@@ -20,6 +27,8 @@ public class Settings implements ActionListener {
         settingsWindow.setVisible(true);
     }
 
+    // MODIFIES: settingsWindow
+    // EFFECTS: initializes the settings window
     public void initializeSettingsWindow() {
         int windowWidth = InitializationConstants.WINDOW_WIDTH;
         int windowHeight = InitializationConstants.WINDOW_HEIGHT;
@@ -32,6 +41,7 @@ public class Settings implements ActionListener {
         settingsWindow.setResizable(false);
     }
 
+    // MODIFIES: changeTargetColorButton, changeTargetSizeButton, changeTargetSpeedButton, returnToMainMenuButton
     public void initializeSettingsButtons() {
         int windowWidth = InitializationConstants.WINDOW_WIDTH;
         int buttonWidth = InitializationConstants.BUTTON_WIDTH;
@@ -55,6 +65,8 @@ public class Settings implements ActionListener {
         returnToMainMenuButton.addActionListener(this);
     }
 
+    // MODIFIES: settingsWindow
+    // EFFECTS: adds settings window buttons to settings window
     public void addSettingsButtonsToSettingsWindow() {
         settingsWindow.add(changeTargetColorButton);
         settingsWindow.add(changeTargetSizeButton);
@@ -62,6 +74,15 @@ public class Settings implements ActionListener {
         settingsWindow.add(returnToMainMenuButton);
     }
 
+    // MODIFIES: settingsWindow
+    // EFFECTS: if changeTargetColorButton is pressed, disposes settingsWindow, and constructs a new
+    //          TargetColorSettings,
+    //          if changeTargetSizeButton is pressed, disposes settingsWindow, and constructs a new
+    //          TargetMaxSizeSettings,
+    //          if changeTargetSpeedButton is pressed, disposes settingsWindow, and constructs a new
+    //          TargetMaxSpeedSettings,
+    //          if returnToMainMenuButton is pressed, disposes settingsWindow, and constructs a new
+    //          MainMenu
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == changeTargetColorButton) {

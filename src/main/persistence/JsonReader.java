@@ -4,6 +4,7 @@ import model.*;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import ui.AimTrainerConsole;
+import ui.GamePanel;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -22,10 +23,18 @@ public class JsonReader {
 
     // EFFECTS: reads AimTrainerConsole from file and returns it;
     // throws IOException if an error occurs reading data from file
-    public AimTrainerConsole read() throws IOException {
+    public AimTrainerConsole readAimTrainerConsole() throws IOException {
         String jsonData = readFile(source);
         JSONObject jsonObject = new JSONObject(jsonData);
         return parseAimTrainerConsole(jsonObject);
+    }
+
+    // EFFECTS: reads GamePanel from file and returns it;
+    // throws IOException if an error occurs reading data from file
+    public GamePanel readGamePanel() throws IOException {
+        String jsonData = readFile(source);
+        JSONObject jsonObject = new JSONObject(jsonData);
+        return parseGamePanel(jsonObject);
     }
 
     // EFFECTS: reads source file as string and returns it
@@ -52,6 +61,31 @@ public class JsonReader {
         boolean isMovingGame = addIsMovingGame(jsonObject);
         return new AimTrainerConsole(targets, hitTargets, nonHitTargets,
                 score, hitAttempts, successfulHits, accuracy, name, isMovingGame);
+    }
+
+    // EFFECTS: parses GamePanel from JSON object and returns it
+    private GamePanel parseGamePanel(JSONObject jsonObject) {
+        Targets targets = addTargets(jsonObject);
+        HitTargets hitTargets = addHitTargets(jsonObject);
+        NonHitTargets nonHitTargets = addNonHitTargets(jsonObject);
+        int score = addScore(jsonObject);
+        int hitAttempts = addHitAttempts(jsonObject);
+        int successfulHits = addSuccessfulHits(jsonObject);
+        double accuracy = addAccuracy(jsonObject);
+        boolean isMovingGame = addIsMovingGame(jsonObject);
+        String name = addName(jsonObject);
+        return new GamePanel(targets, hitTargets, nonHitTargets, score, hitAttempts, successfulHits, accuracy,
+                isMovingGame, name) {
+            @Override
+            public void startGameThread() {
+
+            }
+
+            @Override
+            public void displayGameOverScreen() {
+
+            }
+        };
     }
 
     // MODIFIES: this

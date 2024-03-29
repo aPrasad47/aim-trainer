@@ -1,5 +1,9 @@
 package ui;
 
+/*
+GamePanel class: represents an abstract game panel class with all the attributes of a game
+ */
+
 import model.*;
 
 import javax.swing.*;
@@ -15,13 +19,39 @@ public abstract class GamePanel extends JPanel {
     protected int successfulHits;
     protected double accuracy;
     protected boolean isMovingGame;
+    protected String name;
 
     protected GameWindowConstants gameWindowConstants = new GameWindowConstants();
 
     protected int lives = gameWindowConstants.getMaxLives();
 
+    // MODIFIES: this
+    // EFFECTS: constructs a GamePanel with isMovingGame to denote the type of game, and initializes layout, size, and
+    //          double buffered
     public GamePanel(boolean isMovingGame) {
         this.isMovingGame = isMovingGame;
+
+        this.setLayout(new BorderLayout());
+        this.setSize(gameWindowConstants.getGameWindowWidth(), gameWindowConstants.getGameWindowHeight());
+        this.setDoubleBuffered(true);
+    }
+
+    // for parsing in JsonReader
+    // MODIFIES: this
+    // EFFECTS: constructs a GamePanel with isMovingGame to denote the type of game, and initializes layout, size, and
+    //          double buffered
+    public GamePanel(Targets targets, HitTargets hitTargets, NonHitTargets nonHitTargets, int score, int hitAttempts,
+                     int successfulHits, double accuracy, boolean isMovingGame, String name) {
+        this.targets = targets;
+        this.hitTargets = hitTargets;
+        this.nonHitTargets = nonHitTargets;
+        this.score = score;
+        this.hitAttempts = hitAttempts;
+        this.successfulHits = successfulHits;
+        this.accuracy = accuracy;
+        this.isMovingGame = isMovingGame;
+        this.name = name;
+
         this.setLayout(new BorderLayout());
         this.setSize(gameWindowConstants.getGameWindowWidth(), gameWindowConstants.getGameWindowHeight());
         this.setDoubleBuffered(true);
@@ -29,6 +59,7 @@ public abstract class GamePanel extends JPanel {
 
     public abstract void startGameThread();
 
+    // EFFECTS: initializes round
     public void initializeRound() {
         targets = new Targets();
         hitTargets = new HitTargets();
@@ -39,6 +70,7 @@ public abstract class GamePanel extends JPanel {
         accuracy = 100.0;
     }
 
+    // EFFECTS: generates and returns a random bounded position, with x bounded by maxX, and y bounded by maxY
     public Position generateRandomBoundedPosition(int maxX, int maxY) {
         int targetRadius = gameWindowConstants.getMaxTargetRadius();
         int minX = targetRadius;
@@ -54,6 +86,8 @@ public abstract class GamePanel extends JPanel {
 
     public abstract void displayGameOverScreen();
 
+    // MODIFIES: hitTargets, targets
+    // EFFECTS: handles a mouse click that hits a target
     public void handleHit(Target target) {
         target.targetHit();
         hitTargets.addTarget(target);
@@ -65,6 +99,8 @@ public abstract class GamePanel extends JPanel {
                 gameWindowConstants.getGameWindowHeight()), false));
     }
 
+    // MODIFIES: nonHitTargets, targets
+    // EFFECTS: handles a mouse click that hits a target
     public void handleMiss(Target target) {
         target.decrementLifeSpan();
         if (target.getLifeSpan() == 0) {
@@ -74,6 +110,7 @@ public abstract class GamePanel extends JPanel {
         hitAttempts++;
     }
 
+    // EFFECTS: updates accuracy
     public void updateAccuracy() {
         if (hitAttempts == 0) {
             accuracy = 100.0;
@@ -82,6 +119,7 @@ public abstract class GamePanel extends JPanel {
         }
     }
 
+    // EFFECTS: paints all non-hit targets on to from
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
@@ -102,6 +140,7 @@ public abstract class GamePanel extends JPanel {
         }
     }
 
+    // EFFECTS: handles the target size change as the game is played
     @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
     public void handleTargetSizeChange(Target target, int maxTargetSize) {
         Thread sizeChangeThread = new Thread(() -> {
@@ -166,4 +205,11 @@ public abstract class GamePanel extends JPanel {
         return isMovingGame;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }

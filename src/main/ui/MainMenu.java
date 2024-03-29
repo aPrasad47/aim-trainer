@@ -1,8 +1,11 @@
 package ui;
 
+/*
+MainMenu class: represents the main menu of the aim trainer, with associated buttons
+ */
+
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -15,6 +18,9 @@ public class MainMenu implements ActionListener {
 
     private JLabel welcomeLabel;
 
+    // MODIFIES: mainMenuWindow
+    // EFFECTS: constructs a new MainMenu, and initializes the mainMenuWindow, the main menu buttons, and adds the
+    //          main menu buttons to mainMenuWindow
     public MainMenu() {
         initializeMainMenuWindow();
         initializeMainMenuButtons();
@@ -23,6 +29,8 @@ public class MainMenu implements ActionListener {
         mainMenuWindow.setVisible(true);
     }
 
+    // MODIFIES: mainMenuWindow
+    // EFFECTS: initializes mainMenuWindow
     public void initializeMainMenuWindow() {
         int windowWidth = InitializationConstants.WINDOW_WIDTH;
         int windowHeight = InitializationConstants.WINDOW_HEIGHT;
@@ -41,6 +49,8 @@ public class MainMenu implements ActionListener {
         mainMenuWindow.add(welcomeLabel);
     }
 
+    // MODIFIES: playButton, statisticsButton, settingsButton
+    // EFFECTS: initializes playButton, statisticsButton, and settingsButton
     public void initializeMainMenuButtons() {
         int windowWidth = InitializationConstants.WINDOW_WIDTH;
         int buttonWidth = InitializationConstants.BUTTON_WIDTH;
@@ -59,12 +69,18 @@ public class MainMenu implements ActionListener {
         settingsButton.addActionListener(this);
     }
 
+    // MODIFIES: mainMenuWindow
+    // EFFECTS: adds playButton, statisticsButton, and settingsButton to mainMenuWindow
     public void addMainMenuButtonsToMainMenuWindow() {
         mainMenuWindow.add(playButton);
         mainMenuWindow.add(statisticsButton);
         mainMenuWindow.add(settingsButton);
     }
 
+    // MODIFIES: mainMenuWindow
+    // EFFECTS: if playButton is pressed, disposes mainMenuWindow, and constructs a new GameModeSelector,
+    //          if statisticsButton is pressed, disposes mainMenuWindow, and constructs a new Statistics,
+    //          if settingsButton is pressed, disposes mainMenuWindow, and constructs a new Settings
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == playButton) {

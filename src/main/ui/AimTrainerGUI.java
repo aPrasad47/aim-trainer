@@ -1,5 +1,10 @@
 package ui;
 
+/*
+AimTrainerGUI Target: represents a GUI with an isMovingGame movingGameWindow, stationaryGameWindow,
+                      and gameWindowConstants
+ */
+
 import javax.swing.*;
 import static javax.swing.WindowConstants.*;
 
@@ -11,11 +16,16 @@ public class AimTrainerGUI {
 
     private GameWindowConstants gameWindowConstants = new GameWindowConstants();
 
+    // EFFECTS: constructs and AimTrainerGUI with isMovingGame to denote the type of game,
+    //          then starts the game
     public AimTrainerGUI(boolean isMovingGame) {
         this.isMovingGame = isMovingGame;
         startGame();
     }
 
+    // MODIFIES: movingGameWindow, stationaryGameWindow
+    // EFFECTS: if (isMovingGame), then sets up and plays moving game, otherwise
+    //          sets up and plays stationary game
     public void startGame() {
         if (isMovingGame) {
             movingGameWindowSetup();
@@ -30,6 +40,8 @@ public class AimTrainerGUI {
         }
     }
 
+    // MODIFIES: movingGameWindow
+    // EFFECTS: sets up movingGameWindow frame
     public void movingGameWindowSetup() {
         int gameWindowWidth = gameWindowConstants.getGameWindowWidth();
         int gameWindowHeight = gameWindowConstants.getGameWindowHeight();
@@ -43,6 +55,8 @@ public class AimTrainerGUI {
 
     }
 
+    // MODIFIES: stationaryGameWindow
+    // EFFECTS: sets up stationaryGameWindow frame
     public void stationaryGameWindowSetup() {
         int gameWindowWidth = gameWindowConstants.getGameWindowWidth();
         int gameWindowHeight = gameWindowConstants.getGameWindowHeight();

@@ -17,7 +17,7 @@ public class JsonReaderTest extends JsonTest {
     void testReaderNonExistentFile() {
         JsonReader reader = new JsonReader("./data/noSuchFile.json");
         try {
-            reader.read();
+            reader.readAimTrainerConsole();
             fail("IOException expected");
         } catch (IOException e) {
             // pass
@@ -28,7 +28,7 @@ public class JsonReaderTest extends JsonTest {
     void testReaderFirstQuitSession() {
         JsonReader reader = new JsonReader("./data/testReaderFirstQuitAimTrainingSession.json");
         try {
-            AimTrainerConsole atc = reader.read();
+            AimTrainerConsole atc = reader.readAimTrainerConsole();
             checkAimTrainerConsole(0, 0, 0, 100.0, "",
                     false, atc);
             ArrayList<Target> targets = atc.getTargets().getTargetsArray();
@@ -46,7 +46,7 @@ public class JsonReaderTest extends JsonTest {
     void testReaderGeneralMovingSession() {
         JsonReader reader = new JsonReader("./data/testReaderGeneralMovingAimTrainingSession.json");
         try {
-            AimTrainerConsole atc = reader.read();
+            AimTrainerConsole atc = reader.readAimTrainerConsole();
             checkAimTrainerConsole(4, 6, 4, 66.66666666666666, "moving",
                     true, atc);
             ArrayList<Target> targets = atc.getTargets().getTargetsArray();
@@ -85,7 +85,7 @@ public class JsonReaderTest extends JsonTest {
     void testReaderGeneralStationarySession() {
         JsonReader reader = new JsonReader("./data/testReaderGeneralStationaryAimTrainingSession.json");
         try {
-            AimTrainerConsole atc = reader.read();
+            AimTrainerConsole atc = reader.readAimTrainerConsole();
             checkAimTrainerConsole(4, 6, 4, 66.66666666666666, "stationary",
                     false, atc);
             ArrayList<Target> targets = atc.getTargets().getTargetsArray();

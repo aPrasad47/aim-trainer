@@ -131,7 +131,7 @@ public class AimTrainerConsole implements Writable {
     // EFFECTS: loads and resumes the previous aim training session
     public void resumeSessionFromSave() { //load the session, then
         try {
-            AimTrainerConsole atc = jsonReader.read();
+            AimTrainerConsole atc = jsonReader.readAimTrainerConsole();
             System.out.println("Loaded " + atc.getName() + " from " + JSON_STORE);
             if (isMovingGame) {
                 playMovingGame(atc);

@@ -1,5 +1,9 @@
 package ui;
 
+/*
+MouseHandler class: represents the input of the mouse and how to handle it
+ */
+
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -8,8 +12,9 @@ public class MouseHandler implements MouseListener {
     private int mouseClickX;
     private int mouseClickY;
     private boolean isMouseInsideFrame = false;
-    private AimTrainerGUI aimTrainerGUI;
 
+    // EFFECTS: when a mouse is clicked, sets isMouseClicked to true, sets mouseClickX to the x position of the
+    //          mouse click, and sets mouseClickY to the y position of the mouse click
     @Override
     public void mouseClicked(MouseEvent e) {
         isMouseClicked = true;

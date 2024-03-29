@@ -352,4 +352,9 @@ public class TargetTest {
         assertEquals(0, targetBottomLeftMoving.getLifeSpan());
     }
 
+    @Test
+    public void testIncrementTargetSize() {
+
+    }
+
 }

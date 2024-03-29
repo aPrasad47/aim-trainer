@@ -1,5 +1,9 @@
 package ui;
 
+/*
+InitializationConstants class: represents all the constants used to initialize a game and GUI
+ */
+
 public class InitializationConstants {
     public static final int WINDOW_WIDTH = 500;
     public static final int WINDOW_HEIGHT = 300;
