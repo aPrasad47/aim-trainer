@@ -27,6 +27,7 @@ public class CloseWindowHandler implements WindowListener {
 
         JFrame frame = (JFrame) e.getWindow();
         frame.dispose();
+        System.exit(0);
     }
 
     @Override
