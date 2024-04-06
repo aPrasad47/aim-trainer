@@ -5,9 +5,13 @@ MainMenu class: represents the main menu of the aim trainer, with associated but
  */
 
 
+import model.EventLog;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class MainMenu implements ActionListener {
     private JFrame mainMenuWindow;
@@ -39,10 +43,11 @@ public class MainMenu implements ActionListener {
 
         mainMenuWindow = new JFrame("Aim Trainer - Main Menu");
         mainMenuWindow.setSize(windowWidth, windowHeight);
-        mainMenuWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        mainMenuWindow.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         mainMenuWindow.setLocationRelativeTo(null);
         mainMenuWindow.setLayout(null);
         mainMenuWindow.setResizable(false);
+        mainMenuWindow.addWindowListener(new CloseWindowHandler(EventLog.getInstance()));
 
         welcomeLabel = new JLabel("Welcome to the Aim Trainer!");
         welcomeLabel.setBounds((windowWidth - buttonWidth) / 2 + 10, 10, buttonWidth, buttonHeight);

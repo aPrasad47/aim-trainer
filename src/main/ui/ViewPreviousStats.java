@@ -4,6 +4,7 @@ package ui;
 ViewPreviousStats class: represents the window that displays the stats and info of the most recent saved session
  */
 
+import model.EventLog;
 import persistence.JsonReader;
 
 import javax.swing.*;
@@ -108,10 +109,11 @@ public class ViewPreviousStats extends JFrame implements ActionListener {
     public void initializeViewPreviousSessionWindow() {
         this.setTitle("Previous Session Stats / Info");
         this.setSize(new Dimension(400, 150));
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.setLayout(null);
+        this.addWindowListener(new CloseWindowHandler(EventLog.getInstance()));
     }
 
     // MODIFIES: sessions

@@ -6,6 +6,8 @@ TargetMaxSizeSettings class: represents the target max size settings of the aim 
  */
 
 
+import model.EventLog;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -37,11 +39,12 @@ public class TargetMaxSizeSettings extends JFrame implements ActionListener {
         int windowHeight = InitializationConstants.WINDOW_HEIGHT;
 
         this.setSize(windowWidth, windowHeight);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         this.setLocationRelativeTo(null);
         this.setLayout(null);
         this.setResizable(false);
         this.setTitle("Change Max Target Size");
+        this.addWindowListener(new CloseWindowHandler(EventLog.getInstance()));
     }
 
     // MODIFIES: increaseTargetMaxSizeButton, decreaseTargetMaxSizeButton, currentTargetMaxSizeButton, backButton

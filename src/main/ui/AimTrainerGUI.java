@@ -5,6 +5,8 @@ AimTrainerGUI Target: represents a GUI with an isMovingGame movingGameWindow, st
                       and gameWindowConstants
  */
 
+import model.EventLog;
+
 import javax.swing.*;
 import static javax.swing.WindowConstants.*;
 
@@ -52,7 +54,7 @@ public class AimTrainerGUI {
         movingGameWindow.setSize(gameWindowWidth, gameWindowHeight);
         movingGameWindow.setLocationRelativeTo(null);
         movingGameWindow.setLayout(null);
-
+        movingGameWindow.addWindowListener(new CloseWindowHandler(EventLog.getInstance()));
     }
 
     // MODIFIES: stationaryGameWindow
@@ -67,5 +69,6 @@ public class AimTrainerGUI {
         stationaryGameWindow.setSize(gameWindowWidth, gameWindowHeight);
         stationaryGameWindow.setLocationRelativeTo(null);
         stationaryGameWindow.setLayout(null);
+        stationaryGameWindow.addWindowListener(new CloseWindowHandler(EventLog.getInstance()));
     }
 }

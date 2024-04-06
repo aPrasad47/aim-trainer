@@ -4,6 +4,7 @@ package ui;
 GameOverScreen class: represent a game over screen, where a user can save their session
  */
 
+import model.EventLog;
 import model.Target;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -44,10 +45,11 @@ public class GameOverScreen extends JFrame implements ActionListener, Writable {
 
         this.setTitle("Game Over!");
         this.setSize(InitializationConstants.WINDOW_WIDTH, InitializationConstants.WINDOW_HEIGHT + 70);
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.setLayout(null);
+        this.addWindowListener(new CloseWindowHandler(EventLog.getInstance()));
 
         initializeGameOverScreenComponents(score, accuracy);
 
@@ -145,7 +147,8 @@ public class GameOverScreen extends JFrame implements ActionListener, Writable {
         displayAllHitTargetsWindow.setResizable(false);
         displayAllHitTargetsWindow.setLayout(null);
         displayAllHitTargetsWindow.setLocationRelativeTo(null);
-        displayAllHitTargetsWindow.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        displayAllHitTargetsWindow.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        displayAllHitTargetsWindow.addWindowListener(new CloseWindowHandler(EventLog.getInstance()));
     }
 
     // MODIFIES: gamePanel, jsonWriter

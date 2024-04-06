@@ -87,6 +87,13 @@ public class Target {
     // MODIFIES: this
     // EFFECTS: when target is hit, sets hit to true
     public void targetHit() {
+        String positionX = String.valueOf(getPosition().getX());
+        String positionY = String.valueOf(getPosition().getX());
+
+        String position = "(" + positionX + ", " + positionY + ")";
+
+        EventLog.getInstance().logEvent(new Event("Target at position " + position + " is hit"));
+
         hit = true;
     }
 

@@ -8,6 +8,7 @@ import model.Target;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class DisplayHitTargetsPanel extends JPanel {
     private GamePanel gamePanel;
@@ -50,14 +51,14 @@ public class DisplayHitTargetsPanel extends JPanel {
 
     // EFFECTS: paints (displays) all hit targets on to frame, filtered by radius <= maxTargetSize
     public void displayFilteredHitTargets(Graphics2D g2d) {
-        for (Target hitTarget : gamePanel.getHitTargets().getTargetsArray()) {
+        ArrayList<Target> filteredHitTargets = gamePanel.getHitTargets().filterTargets(maxTargetSize);
+
+        for (Target hitTarget : filteredHitTargets) {
             int targetX = hitTarget.getPosition().getX();
             int targetY = hitTarget.getPosition().getY();
             int radius = hitTarget.getTargetSize();
 
-            if (radius <= maxTargetSize) {
-                drawTarget(g2d, targetX, targetY, radius);
-            }
+            drawTarget(g2d, targetX, targetY, radius);
         }
     }
 

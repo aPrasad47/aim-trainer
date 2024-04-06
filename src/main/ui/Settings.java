@@ -4,6 +4,8 @@ package ui;
 Settings class: represents the settings of the aim trainer, to alter the game
  */
 
+import model.EventLog;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -35,10 +37,11 @@ public class Settings implements ActionListener {
 
         settingsWindow = new JFrame("Aim Trainer - Settings");
         settingsWindow.setSize(windowWidth, windowHeight);
-        settingsWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        settingsWindow.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         settingsWindow.setLocationRelativeTo(null);
         settingsWindow.setLayout(null);
         settingsWindow.setResizable(false);
+        settingsWindow.addWindowListener(new CloseWindowHandler(EventLog.getInstance()));
     }
 
     // MODIFIES: changeTargetColorButton, changeTargetSizeButton, changeTargetSpeedButton, returnToMainMenuButton

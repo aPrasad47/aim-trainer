@@ -4,6 +4,7 @@ package model;
 Class Targets: represents an arraylist of targets
  */
 
+import java.awt.*;
 import java.util.ArrayList;
 
 public class Targets {
@@ -16,7 +17,40 @@ public class Targets {
     // MODIFIES: this
     // EFFECTS: adds target to Targets
     public void addTarget(Target target) {
+        String positionX = String.valueOf(target.getPosition().getX());
+        String positionY = String.valueOf(target.getPosition().getX());
+
+        String isHit;
+        String typeOfTargetsList;
+
+        String position = "(" + positionX + ", " + positionY + ")";
+
+        if (target.isHit()) {
+            isHit = "hit";
+            typeOfTargetsList = "hit targets array";
+
+            EventLog.getInstance().logEvent(new Event("Added "
+                    + isHit + " target at position " + position + " to " + typeOfTargetsList));
+        }
+
         targetsArray.add(target);
+    }
+
+    public ArrayList<Target> filterTargets(int maxTargetSize) {
+        ArrayList<Target> filteredTargets = new ArrayList<>();
+
+        EventLog.getInstance().logEvent(new Event("Filtered all hit targets without a radius greater than "
+                + maxTargetSize));
+
+        for (Target target : targetsArray) {
+            int radius = target.getTargetSize();
+
+            if (radius <= maxTargetSize) {
+                filteredTargets.add(target);
+            }
+        }
+
+        return filteredTargets;
     }
 
     // REQUIRES: targetsArray.size() > 0 && 0 <= index <= targets.size() - 1

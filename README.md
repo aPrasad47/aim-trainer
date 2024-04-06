@@ -47,3 +47,21 @@ aim, in transitioning.
 - You can reload the state of my application by pressing the Statistics button, then pressing the
   View Previous Session button. This will load the state and show the statistics and info associated with the most recent saved session.
   
+## Phase 4: Task 2
+Target at position (650, 650) is hit \
+Added hit target at position (650, 650) to hit targets array \
+Target at position (451, 451) is hit \
+Added hit target at position (451, 451) to hit targets array \
+Target at position (527, 527) is hit \
+Added hit target at position (527, 527) to hit targets array \
+Target at position (642, 642) is hit \
+Added hit target at position (642, 642) to hit targets array \
+Target at position (138, 138) is hit \
+Added hit target at position (138, 138) to hit targets array \
+Target at position (136, 136) is hit \
+Added hit target at position (136, 136) to hit targets array \
+Target at position (459, 459) is hit \
+Added hit target at position (459, 459) to hit targets array \
+Target at position (210, 210) is hit \
+Added hit target at position (210, 210) to hit targets array \
+Filtered all hit targets without a radius greater than 40000

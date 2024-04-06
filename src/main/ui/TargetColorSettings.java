@@ -4,6 +4,8 @@ package ui;
 TargetColorSettings class: represents the target color settings of the aim trainer, to alter the target colors
  */
 
+import model.EventLog;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -37,11 +39,12 @@ public class TargetColorSettings extends JFrame implements ActionListener {
         int windowHeight = InitializationConstants.WINDOW_HEIGHT;
 
         this.setSize(windowWidth, windowHeight);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         this.setLocationRelativeTo(null);
         this.setLayout(null);
         this.setResizable(false);
         this.setTitle("Change Target Color");
+        this.addWindowListener(new CloseWindowHandler(EventLog.getInstance()));
     }
 
     // MODIFIES: redButton, greenButton, blueButton, pinkButton, backButton

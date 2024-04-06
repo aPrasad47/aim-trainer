@@ -4,6 +4,8 @@ package ui;
 Statistics class: represents the statistics of the aim trainer of the saved session
  */
 
+import model.EventLog;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -34,10 +36,11 @@ public class Statistics implements ActionListener {
 
         statisticsWindow = new JFrame("Aim Trainer - Statistics");
         statisticsWindow.setSize(windowWidth, windowHeight);
-        statisticsWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        statisticsWindow.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         statisticsWindow.setLocationRelativeTo(null);
         statisticsWindow.setLayout(null);
         statisticsWindow.setResizable(false);
+        statisticsWindow.addWindowListener(new CloseWindowHandler(EventLog.getInstance()));
     }
 
     // MODIFIES: viewProgressButton, viewPreviousSessionButton, returnToMainMenuButton

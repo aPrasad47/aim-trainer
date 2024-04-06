@@ -4,6 +4,7 @@ package ui;
 ViewProgress class: represents the window that displays the progress of the user over the saved sessions
  */
 
+import model.EventLog;
 import persistence.JsonReader;
 
 import javax.swing.*;
@@ -42,10 +43,11 @@ public class ViewProgress extends JFrame implements ActionListener {
 
         this.setTitle("Progress Over Last 10 Sessions");
         this.setSize(windowWidth, windowHeight + 70);
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.setLayout(null);
+        this.addWindowListener(new CloseWindowHandler(EventLog.getInstance()));
 
         backButton.setBounds(25, windowHeight + 10, 450, 20);
         backButton.addActionListener(this);

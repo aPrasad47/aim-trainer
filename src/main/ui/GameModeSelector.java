@@ -4,6 +4,8 @@ package ui;
 GameModeSelector class: represents a game mode selector window with buttons to select the type of game
  */
 
+import model.EventLog;
+
 import javax.swing.*;
 import static javax.swing.WindowConstants.*;
 import java.awt.event.ActionEvent;
@@ -37,10 +39,11 @@ public class GameModeSelector implements ActionListener {
     public void initializeGameModeSelectorWindow() {
         gameModeSelectorWindow = new JFrame("Aim Trainer - Game Mode Selection");
         gameModeSelectorWindow.setSize(InitializationConstants.WINDOW_WIDTH, InitializationConstants.WINDOW_HEIGHT);
-        gameModeSelectorWindow.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        gameModeSelectorWindow.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         gameModeSelectorWindow.setLocationRelativeTo(null);
         gameModeSelectorWindow.setLayout(null);
         gameModeSelectorWindow.setResizable(false);
+        gameModeSelectorWindow.addWindowListener(new CloseWindowHandler(EventLog.getInstance()));
 
         selectYourGameModeLabel = new JLabel("Select Your Gamemode!");
         selectYourGameModeLabel.setBounds((InitializationConstants.WINDOW_WIDTH
