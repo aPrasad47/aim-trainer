@@ -65,3 +65,16 @@ Added hit target at position (459, 459) to hit targets array \
 Target at position (210, 210) is hit \
 Added hit target at position (210, 210) to hit targets array \
 Filtered all hit targets without a radius greater than 40000
+
+## Phase 4: Task 3
+If I had more time to work on this project, I would refactor the MovingGameInfoBarPanel class and the
+StationaryGameInfoBarPanel class by creating a new class called GameInfoBarPanel that contains
+all the shared functionality in both classes, then having both classes extend the GameInfoBarPanel class. Or, 
+after viewing both the MovingGameInfoBarPanel class and the StationaryGameInfoBarPanel class, and seeing that
+both classes are essentially non-unique with respect to each other, I would delete both the classes and only have a 
+GameInfoBarPanel class that contains all the same information from both classes. I would do this because having both the 
+MovingGameInfoBarPanel class and the StationaryGameInfoBarPanel class is redundant and can cause discrepancies when each 
+game type is played, since some important functionality in one class can be changed, and not changed in the other class, 
+and this can make it difficult to make general changes to both classes while keeping both game modes running in the same 
+way. Basically, by refactoring, it would be easier to make changes to the functionality of the game modes, since there 
+would only be one place to make the changes.
