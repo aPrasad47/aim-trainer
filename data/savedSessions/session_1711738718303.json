@@ -1,0 +1,91 @@
+{
+    "hit-attempts": 12,
+    "score": 9,
+    "hit-targets": [
+        {
+            "positionY": 283,
+            "hit": true,
+            "lifespan": 3,
+            "attemptsToHit": 1,
+            "moving": true,
+            "positionX": 605
+        },
+        {
+            "positionY": 234,
+            "hit": true,
+            "lifespan": 3,
+            "attemptsToHit": 1,
+            "moving": true,
+            "positionX": 461
+        },
+        {
+            "positionY": 139,
+            "hit": true,
+            "lifespan": 3,
+            "attemptsToHit": 1,
+            "moving": false,
+            "positionX": 429
+        },
+        {
+            "positionY": 220,
+            "hit": true,
+            "lifespan": 3,
+            "attemptsToHit": 1,
+            "moving": false,
+            "positionX": 151
+        },
+        {
+            "positionY": 218,
+            "hit": true,
+            "lifespan": 3,
+            "attemptsToHit": 1,
+            "moving": false,
+            "positionX": 664
+        },
+        {
+            "positionY": 444,
+            "hit": true,
+            "lifespan": 3,
+            "attemptsToHit": 1,
+            "moving": false,
+            "positionX": 648
+        },
+        {
+            "positionY": 139,
+            "hit": true,
+            "lifespan": 3,
+            "attemptsToHit": 1,
+            "moving": false,
+            "positionX": 213
+        },
+        {
+            "positionY": 373,
+            "hit": true,
+            "lifespan": 3,
+            "attemptsToHit": 1,
+            "moving": false,
+            "positionX": 510
+        },
+        {
+            "positionY": 434,
+            "hit": true,
+            "lifespan": 3,
+            "attemptsToHit": 1,
+            "moving": false,
+            "positionX": 60
+        }
+    ],
+    "name": "1711738718303",
+    "accuracy": 75,
+    "is-moving-game": true,
+    "successful-hits": 9,
+    "targets": [{
+        "positionY": 405,
+        "hit": false,
+        "lifespan": 2,
+        "attemptsToHit": 1,
+        "moving": true,
+        "positionX": 36
+    }],
+    "non-hit-targets": []
+}

@@ -1,0 +1,18 @@
+{
+    "hit-attempts": 0,
+    "score": 0,
+    "hit-targets": [],
+    "name": "1711731645612",
+    "accuracy": 100,
+    "is-moving-game": false,
+    "successful-hits": 0,
+    "targets": [{
+        "positionY": 201,
+        "hit": false,
+        "lifespan": 3,
+        "attemptsToHit": 1,
+        "moving": false,
+        "positionX": 149
+    }],
+    "non-hit-targets": []
+}

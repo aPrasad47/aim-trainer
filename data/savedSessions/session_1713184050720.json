@@ -1,0 +1,147 @@
+{
+    "hit-attempts": 19,
+    "score": 16,
+    "hit-targets": [
+        {
+            "positionY": 241,
+            "hit": true,
+            "lifespan": 3,
+            "attemptsToHit": 1,
+            "moving": false,
+            "positionX": 485
+        },
+        {
+            "positionY": 166,
+            "hit": true,
+            "lifespan": 3,
+            "attemptsToHit": 1,
+            "moving": false,
+            "positionX": 497
+        },
+        {
+            "positionY": 339,
+            "hit": true,
+            "lifespan": 3,
+            "attemptsToHit": 1,
+            "moving": false,
+            "positionX": 312
+        },
+        {
+            "positionY": 266,
+            "hit": true,
+            "lifespan": 3,
+            "attemptsToHit": 1,
+            "moving": false,
+            "positionX": 467
+        },
+        {
+            "positionY": 294,
+            "hit": true,
+            "lifespan": 3,
+            "attemptsToHit": 1,
+            "moving": false,
+            "positionX": 140
+        },
+        {
+            "positionY": 193,
+            "hit": true,
+            "lifespan": 3,
+            "attemptsToHit": 1,
+            "moving": false,
+            "positionX": 599
+        },
+        {
+            "positionY": 427,
+            "hit": true,
+            "lifespan": 3,
+            "attemptsToHit": 1,
+            "moving": false,
+            "positionX": 515
+        },
+        {
+            "positionY": 152,
+            "hit": true,
+            "lifespan": 3,
+            "attemptsToHit": 1,
+            "moving": false,
+            "positionX": 422
+        },
+        {
+            "positionY": 395,
+            "hit": true,
+            "lifespan": 3,
+            "attemptsToHit": 1,
+            "moving": false,
+            "positionX": 95
+        },
+        {
+            "positionY": 334,
+            "hit": true,
+            "lifespan": 3,
+            "attemptsToHit": 1,
+            "moving": false,
+            "positionX": 251
+        },
+        {
+            "positionY": 339,
+            "hit": true,
+            "lifespan": 3,
+            "attemptsToHit": 1,
+            "moving": false,
+            "positionX": 685
+        },
+        {
+            "positionY": 116,
+            "hit": true,
+            "lifespan": 3,
+            "attemptsToHit": 1,
+            "moving": false,
+            "positionX": 620
+        },
+        {
+            "positionY": 313,
+            "hit": true,
+            "lifespan": 3,
+            "attemptsToHit": 1,
+            "moving": false,
+            "positionX": 159
+        },
+        {
+            "positionY": 333,
+            "hit": true,
+            "lifespan": 3,
+            "attemptsToHit": 1,
+            "moving": false,
+            "positionX": 79
+        },
+        {
+            "positionY": 260,
+            "hit": true,
+            "lifespan": 3,
+            "attemptsToHit": 1,
+            "moving": false,
+            "positionX": 398
+        },
+        {
+            "positionY": 267,
+            "hit": true,
+            "lifespan": 3,
+            "attemptsToHit": 1,
+            "moving": false,
+            "positionX": 379
+        }
+    ],
+    "name": "1713184050720",
+    "accuracy": 84.21052631578947,
+    "is-moving-game": false,
+    "successful-hits": 16,
+    "targets": [{
+        "positionY": 293,
+        "hit": false,
+        "lifespan": 2,
+        "attemptsToHit": 1,
+        "moving": false,
+        "positionX": 193
+    }],
+    "non-hit-targets": []
+}

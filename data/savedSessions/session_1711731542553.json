@@ -1,0 +1,35 @@
+{
+    "hit-attempts": 2,
+    "score": 2,
+    "hit-targets": [
+        {
+            "positionY": 354,
+            "hit": true,
+            "lifespan": 3,
+            "attemptsToHit": 1,
+            "moving": false,
+            "positionX": 127
+        },
+        {
+            "positionY": 139,
+            "hit": true,
+            "lifespan": 3,
+            "attemptsToHit": 1,
+            "moving": false,
+            "positionX": 512
+        }
+    ],
+    "name": "1711731542553",
+    "accuracy": 100,
+    "is-moving-game": false,
+    "successful-hits": 2,
+    "targets": [{
+        "positionY": 400,
+        "hit": false,
+        "lifespan": 3,
+        "attemptsToHit": 1,
+        "moving": false,
+        "positionX": 128
+    }],
+    "non-hit-targets": []
+}
